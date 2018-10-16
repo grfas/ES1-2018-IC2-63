@@ -4,5 +4,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="C:/Users/Francisco/Downloads/restfb-2.11.0.jar"/>
 	<classpathentry kind="lib" path="C:/Users/utilizador/Downloads/twitter4j-4.0.7 (1)/lib/twitter4j-core-4.0.7.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JavaMail API"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
