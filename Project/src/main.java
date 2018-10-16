@@ -11,7 +11,7 @@ public class main extends Application{
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
 		
-		Parent root = FXMLLoader.load(getClass().getResource("/application/GUI.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/GUI.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("MyTitle");
 		primaryStage.setScene(scene);
