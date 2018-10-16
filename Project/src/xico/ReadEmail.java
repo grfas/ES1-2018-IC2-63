@@ -11,7 +11,7 @@ import javax.mail.Store;
 
 public class ReadEmail {
     public static final String USERNAME = "grfas@iscte-iul.pt";
-    public static final String PASSWORD = "Reconhecimento45.";
+    public static final String PASSWORD = "PAss";
 
     public static void main(String[] args) throws Exception {
         // 1. Setup properties for the mail session.
