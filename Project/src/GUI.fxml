@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="401.0" prefWidth="595.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+	<children>
+		<TabPane prefHeight="401.0" prefWidth="410.0" tabClosingPolicy="UNAVAILABLE">
+			<tabs>
+				<Tab text="Email">
+					<content>
+						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane layoutX="157.0" prefHeight="372.0" prefWidth="253.0" />
+                        <ListView prefHeight="372.0" prefWidth="158.0" />
+                     </children>
+						</AnchorPane>
+					</content>
+				</Tab>
+				<Tab text="Twitter">
+					<content>
+						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="372.0" prefWidth="373.0">
+                     <children>
+                        <AnchorPane layoutX="159.0" prefHeight="374.0" prefWidth="252.0" />
+                     </children></AnchorPane>
+					</content>
+				</Tab>
+				<Tab text="Facebook">
+					<content>
+						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane layoutX="160.0" prefHeight="376.0" prefWidth="253.0" />
+                     </children></AnchorPane>
+					</content>
+				</Tab>
+			</tabs>
+		</TabPane>
+      <TextField layoutX="455.0" layoutY="228.0" prefHeight="25.0" prefWidth="114.0" promptText="Insira Palavra" />
+      <Button layoutX="455.0" layoutY="263.0" mnemonicParsing="false" text="Button" />
+	</children>
+</AnchorPane>
