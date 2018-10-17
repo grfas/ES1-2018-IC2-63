@@ -9,7 +9,7 @@ import twitter4j.conf.ConfigurationBuilder;
 
 public class TwitterApp {
 
-	public static void main (String[]args) throws TwitterException {
+	public void iniciaTwitter() {
 
 		ConfigurationBuilder cb = new ConfigurationBuilder();
 
