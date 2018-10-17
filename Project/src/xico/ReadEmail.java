@@ -1,19 +1,22 @@
 package xico;
+import java.io.IOException;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
 import javax.mail.Folder;
 import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.NoSuchProviderException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Store;
 
 
 public class ReadEmail {
-    public static final String USERNAME = "grfas@iscte-iul.pt";
-    public static final String PASSWORD = "PAss";
+    public static final String USERNAME = "lbfjo@iscte-iul.pt";
+    public static final String PASSWORD = "1V5r45698712";
 
-    public void iniciaMail() {        // 1. Setup properties for the mail session.
+    public void iniciaMail() throws MessagingException, IOException {        // 1. Setup properties for the mail session.
         Properties props = new Properties();
         props.put("mail.pop3.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
         props.put("mail.pop3.socketFactory.fallback", "false");

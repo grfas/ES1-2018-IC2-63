@@ -1,3 +1,7 @@
+import java.io.IOException;
+
+import javax.mail.MessagingException;
+
 import Facebook.InicializadorFacebook;
 import Twitter.TwitterApp;
 import javafx.application.Application;
@@ -19,15 +23,15 @@ public class Main extends Application{
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
-	public static void main(String[] arg0){
+	public static void main(String[] arg0) throws MessagingException, IOException{
 		// TODO Auto-generated method stub
 		TwitterApp twitt = new TwitterApp();
 		InicializadorFacebook iniciaFace = new InicializadorFacebook();
 		ReadEmail mail= new ReadEmail() ;
 		
-		mail.iniciaMail();
-		twitt.iniciaTwitter();
-		iniciaFace.IniciaFace();
+		mail.iniciaMail(); //Funciona no entanto é infinito(incluir filtro)
+		//twitt.iniciaTwitter(); //Problema com a bilbioteca
+		iniciaFace.IniciaFace();//funciona
 		launch(arg0);
 		
 		
