@@ -8,8 +8,18 @@ import twitter4j.TwitterFactory;
 import twitter4j.conf.ConfigurationBuilder;
 
 public class TwitterApp {
-
-	public static void main (String[]args) throws TwitterException {
+	
+	private List<Status> estadosDoIscte;
+	
+	public List<Status> getListaTwitts(){
+		return estadosDoIscte;
+	}
+	
+	public TwitterApp(){
+		
+	}
+	
+	public void initTwitter() throws TwitterException {
 
 		ConfigurationBuilder cb = new ConfigurationBuilder();
 
@@ -28,10 +38,10 @@ public class TwitterApp {
 		{
 			System.out.println(st.getUser().getName()+" -- "+st.getText());
 		 */
-		List<Status> estadosDoIscte = twitter.getUserTimeline("iscteiul");
+		estadosDoIscte = twitter.getUserTimeline("iscteiul");
 		for(Status si: estadosDoIscte)
 		{
-			System.out.println(si.getUser().getName()+" -- "+si.getText());
+//			System.out.println(si.getUser().getName()+" -- "+si.getText());
 		}
 		//System.out.println(st.getUser().getName().equals("Rafa")+" --"+st.getText());
 	}
