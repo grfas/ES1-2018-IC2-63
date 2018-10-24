@@ -27,9 +27,9 @@ public class Main extends Application{
 		// TODO Auto-generated method stub
 		TwitterApp twitt = new TwitterApp();
 		InicializadorFacebook iniciaFace = new InicializadorFacebook();
-		ReadEmail mail= new ReadEmail() ;
+		//ReadEmail mail= new ReadEmail() ;
 		
-		mail.iniciaMail(); //Funciona no entanto é infinito(incluir filtro)
+		//mail.iniciaMail(); //Funciona no entanto é infinito(incluir filtro)
 		//twitt.iniciaTwitter(); //Problema com a bilbioteca
 		iniciaFace.IniciaFace();//funciona
 		launch(arg0);

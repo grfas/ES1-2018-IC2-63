@@ -33,7 +33,7 @@ public class InicializadorFacebook {
 		for (List<Post> page : myFeed) {
 			for (Post aPost : page) {
 				// Filters only posts that contain the word "Inform"
-				if (aPost.getMessage() != null && aPost.getMessage().contains("Gonçalo")) {
+				if (aPost.getMessage() != null && aPost.getMessage().contains("Iscte")) {
 					System.out.println("---- Post " + counter5 + " ----");
 					System.out.println("Id: " + "fb.com/" + aPost.getId());
 					System.out.println("Message: " + aPost.getMessage());
