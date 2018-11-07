@@ -1,17 +1,9 @@
-package Twitter;
+ackage Twitter;
 
 import java.util.List;
 import twitter4j.*;
 
-
 public class TwitterApp {
-	
-	
-	public TwitterApp(){
-		
-	}
-	
-	public void initTwitter() throws TwitterException {
 
 	public void iniciaTwitter() {
 
