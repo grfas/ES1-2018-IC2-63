@@ -44,7 +44,7 @@ public class Main extends JFrame {
 		
 		twitter= new TwitterApp();
 		twitter.initTwitter();
-		for(Status si: twitter.getListaTwitts())
+		for(Status si: twitter.getListaTweets())
 		{
 			System.out.println(si.getUser().getName()+" -- "+si.getText());
 		}
@@ -75,7 +75,7 @@ public class Main extends JFrame {
 		btnActualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				model.clear();
-				for(Status s : twitter.getListaTwitts()){
+				for(Status s : twitter.getListaTweets()){
 					model.addElement(s.getUser().getName()+ " - "+s.getCreatedAt());
 					
 				}
