@@ -6,9 +6,19 @@ import twitter4j.conf.ConfigurationBuilder;
 
 
 public class TwitterApp {
+<<<<<<< HEAD
 	ConfigurationBuilder cb = new ConfigurationBuilder();
 	TwitterFactory tf = new TwitterFactory(cb.build());
 	twitter4j.Twitter twitter = tf.getInstance();
+=======
+	
+	private static List<Status> estadosDoIscte;
+	
+	public static List<Status> getListaTwitts(){
+		return estadosDoIscte;
+	}
+	
+>>>>>>> refs/heads/Swing
 	public TwitterApp(){
 		
 	}
