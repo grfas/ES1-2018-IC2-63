@@ -43,7 +43,7 @@ public class Main extends JFrame {
 	 */
 	public static void main(String[] args) throws TwitterException {
 		System.out.println("ola");
-		
+		System.out.println("");
 		twitter= new TwitterApp();
 		twitter.initTwitter();
 		for(Status si: twitter.getListaTweets())
