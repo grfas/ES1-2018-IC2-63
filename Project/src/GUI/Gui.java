@@ -42,19 +42,18 @@ public class Gui extends JFrame {
 	 * @throws TwitterException 
 	 */
 	public static void main(String[] args) {
-		System.out.println("ola");
-		System.out.println("7890");
-//		twitter= new TwitterApp();
-//		try {
-//			twitter.initTwitter();
-//		} catch (TwitterException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
-//		for(Status si: twitter.getListaTweets())
-//		{
-//			System.out.println(si.getUser().getName()+" -- "+si.getText());
-//		}
+		
+		twitter= new TwitterApp();
+		try {
+			twitter.initTwitter();
+		} catch (TwitterException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		for(Status si: twitter.getListaTweets())
+		{
+			System.out.println(si.getUser().getName()+" -- "+si.getText());
+		}
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -101,7 +100,7 @@ public class Gui extends JFrame {
 				}
 
 				System.out.println("button clicked!");
-//				model.clear();
+				model.clear();
 				areaTweet.setText(null);
 //				relistTweets();
 				
@@ -116,7 +115,7 @@ public class Gui extends JFrame {
 				
 				String selectedValue = (String) listaTweets.getSelectedValue();
 				System.out.println(selectedValue);
-				for(Status s : TwitterApp.getListaTwitts()) {
+				for(Status s : twitter.getListaTweets()) {
 					if(selectedValue.equals(s.getUser().getName()+ " - "+s.getCreatedAt())){
 						areaTweet.setText(null);
 						areaTweet.setText(s.getText()); 	
@@ -129,10 +128,10 @@ public class Gui extends JFrame {
 		});
 	}
 	
-//	private void actualizarTweets() {
-//		this.listaEstados.clear();
-//		this.listaEstados=TwitterApp.getListaTwitts();
-//	}
+	private void actualizarTweets() {
+		this.listaEstados.clear();
+		this.listaEstados=twitter.getListaTweets();
+	}
 
 	private void init() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
