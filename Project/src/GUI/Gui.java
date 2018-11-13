@@ -27,7 +27,7 @@ import javax.swing.JDesktopPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-public class Main extends JFrame {
+public class Gui extends JFrame {
 	private DefaultListModel<String> model = new DefaultListModel<>();
 	private JPanel contentPane1;
 	private JButton btnActualizar;
@@ -41,23 +41,28 @@ public class Main extends JFrame {
 	 * Launch the application.
 	 * @throws TwitterException 
 	 */
-	public static void main(String[] args) throws TwitterException {
+	public static void main(String[] args) {
 		System.out.println("ola");
 		System.out.println("7890");
-		twitter= new TwitterApp();
-		twitter.initTwitter();
-		for(Status si: twitter.getListaTweets())
-		{
-			System.out.println(si.getUser().getName()+" -- "+si.getText());
-		}
+//		twitter= new TwitterApp();
+//		try {
+//			twitter.initTwitter();
+//		} catch (TwitterException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+//		for(Status si: twitter.getListaTweets())
+//		{
+//			System.out.println(si.getUser().getName()+" -- "+si.getText());
+//		}
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					
-					Main frame = new Main();
+					Gui frame = new Gui();
 					frame.setVisible(true);
-					frame.relistTweets();
+//					frame.relistTweets();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -68,21 +73,21 @@ public class Main extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Main() {
+	public Gui() {
 		init();
 		events();
 		
 	}
 	
-	private void relistTweets() {
-
-		for(Status s : TwitterApp.getListaTwitts()){
-			model.addElement(s.getUser().getName()+ " - "+s.getCreatedAt());
-			System.out.println(s.getUser().getName()+ " - "+s.getCreatedAt());
-		}
-		
-		
-	}
+//	private void relistTweets() {
+//
+//		for(Status s : TwitterApp.getListaTwitts()){
+//			model.addElement(s.getUser().getName()+ " - "+s.getCreatedAt());
+//			System.out.println(s.getUser().getName()+ " - "+s.getCreatedAt());
+//		}
+//		
+//		
+//	}
 
 	private void events() {
 		
@@ -98,7 +103,7 @@ public class Main extends JFrame {
 				System.out.println("button clicked!");
 //				model.clear();
 				areaTweet.setText(null);
-				relistTweets();
+//				relistTweets();
 				
 
 			}

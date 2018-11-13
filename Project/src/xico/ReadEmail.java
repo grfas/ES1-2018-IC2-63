@@ -1,4 +1,4 @@
-ackage Twitter;
+package Twitter;
 
 import java.util.List;
 import twitter4j.*;
@@ -6,8 +6,6 @@ import twitter4j.*;
 public class TwitterApp {
 
 	public void iniciaTwitter() {
-
-		ConfigurationBuilder cb = new ConfigurationBuilder();
 
 		cb.setDebugEnabled(true)
 		.setOAuthConsumerKey("4rJVbcVIboahTgUlsd7oOFwDd")
