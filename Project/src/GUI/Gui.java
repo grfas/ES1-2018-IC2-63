@@ -42,7 +42,7 @@ public class Gui extends JFrame {
 	 * @throws TwitterException 
 	 */
 	public static void main(String[] args) {
-		
+		System.out.println("oioi");
 		twitter= new TwitterApp();
 		try {
 			twitter.initTwitter();
