@@ -37,12 +37,13 @@ public class Gui extends JFrame {
 	private List<Status> listaEstados;
 	JTextArea areaTweet = new JTextArea();
 	
+	
 	/**
 	 * Launch the application.
 	 * @throws TwitterException 
 	 */
 	public static void main(String[] args) {
-		System.out.println("oioi");
+		System.out.println("ol");
 		twitter= new TwitterApp();
 		try {
 			twitter.initTwitter();
