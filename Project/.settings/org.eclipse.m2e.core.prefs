@@ -1,4 +1,4 @@
-activeProfiles=
+activeProfiles="Use Maven Project settings to configure Maven dependency resolution"
 eclipse.preferences.version=1
 resolveWorkspaceProjects=true
 version=1
