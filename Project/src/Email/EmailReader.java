@@ -22,7 +22,7 @@ public class EmailReader {
     * Method reads emails from the IMAP or POP3 server.
     * @param isImap - if true then we are reading messages from the IMAP server, if no then read from the POP3 server.
     */
-   private static void readEmails(boolean isImap) {
+   private static void readEmails(boolean isImap){
        // Create all the needed properties - empty!
        Properties connectionProperties = new Properties();
        // Create the session
