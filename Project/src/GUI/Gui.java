@@ -26,24 +26,35 @@ import java.awt.FlowLayout;
 import javax.swing.JDesktopPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 public class Gui extends JFrame {
 	private DefaultListModel<String> model = new DefaultListModel<>();
 	private JPanel contentPane1;
-	private JButton btnActualizar;
+	private JButton btnActualizarT;
 	private static TwitterApp twitter;
 	JList listaTweets = new JList(model);
 	String selecao;
 	private List<Status> listaEstados;
 	JTextArea areaTweet = new JTextArea();
-	
+	private JButton btnActualizarF;
+	private JButton btnActualizarE;
+	private JButton btnAlterarFiltroE;
+	private JTextField textFieldF;
 	
 	/**
 	 * Launch the application.
 	 * @throws TwitterException 
 	 */
 	public static void main(String[] args) {
-		System.out.println("ol");
+		
+		
+		
+		System.out.println("oioi");
+		
+		
+		
+		
 		twitter= new TwitterApp();
 		try {
 			twitter.initTwitter();
@@ -51,10 +62,11 @@ public class Gui extends JFrame {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		for(Status si: twitter.getListaTweets())
-		{
-			System.out.println(si.getUser().getName()+" -- "+si.getText());
-		}
+//		for(Status si: twitter.getListaTweets())
+//		{
+//			System.out.println(si.getUser().getName()+" -- "+si.getText());
+//		}
+		
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -62,7 +74,7 @@ public class Gui extends JFrame {
 					
 					Gui frame = new Gui();
 					frame.setVisible(true);
-//					frame.relistTweets();
+					frame.relistTweets();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -79,19 +91,19 @@ public class Gui extends JFrame {
 		
 	}
 	
-//	private void relistTweets() {
-//
-//		for(Status s : TwitterApp.getListaTwitts()){
-//			model.addElement(s.getUser().getName()+ " - "+s.getCreatedAt());
-//			System.out.println(s.getUser().getName()+ " - "+s.getCreatedAt());
-//		}
-//		
-//		
-//	}
+	private void relistTweets() {
+
+		for(Status s : twitter.getListaTweets()){
+			model.addElement(s.getUser().getName()+ " - "+s.getCreatedAt());
+			System.out.println(s.getUser().getName()+ " - "+s.getCreatedAt());
+		}
+		
+		
+	}
 
 	private void events() {
 		
-		btnActualizar.addActionListener(new ActionListener() {
+		btnActualizarT.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
 				model.clear();
@@ -161,25 +173,45 @@ public class Gui extends JFrame {
 		
 		JScrollPane scrollPane = new JScrollPane();
 		
-		JScrollPane scrollPane_1 = new JScrollPane();
+		JScrollPane scrollPaneE = new JScrollPane();
+		
+		btnActualizarE = new JButton("Actualizar");
+		
+		JTextField textFieldE = new JTextField();
+		textFieldE.setColumns(10);
+		
+		btnAlterarFiltroE = new JButton("Alterar Filtro");
 		GroupLayout gl_panelEmail = new GroupLayout(panelEmail);
 		gl_panelEmail.setHorizontalGroup(
 			gl_panelEmail.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelEmail.createSequentialGroup()
 					.addGap(1)
-					.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 181, GroupLayout.PREFERRED_SIZE)
+					.addComponent(scrollPaneE, GroupLayout.PREFERRED_SIZE, 181, GroupLayout.PREFERRED_SIZE)
 					.addGap(1)
 					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 166, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(135, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panelEmail.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnActualizarE)
+						.addComponent(textFieldE, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnAlterarFiltroE))
+					.addContainerGap(40, Short.MAX_VALUE))
 		);
 		gl_panelEmail.setVerticalGroup(
 			gl_panelEmail.createParallelGroup(Alignment.LEADING)
-				.addComponent(scrollPane_1, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
+				.addComponent(scrollPaneE, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
 				.addComponent(scrollPane, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
+				.addGroup(gl_panelEmail.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(btnActualizarE)
+					.addGap(28)
+					.addComponent(textFieldE, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(btnAlterarFiltroE)
+					.addContainerGap(192, Short.MAX_VALUE))
 		);
 		
 		JList listaEmails = new JList<>();
-		scrollPane_1.setRowHeaderView(listaEmails);
+		scrollPaneE.setRowHeaderView(listaEmails);
 		
 		JTextArea areaEmails = new JTextArea();
 		scrollPane.setViewportView(areaEmails);
@@ -191,6 +223,13 @@ public class Gui extends JFrame {
 		JScrollPane scrollPane_2 = new JScrollPane();
 		
 		JScrollPane scrollPane_3 = new JScrollPane();
+		
+		btnActualizarF = new JButton("Actualizar");
+		
+		textFieldF = new JTextField();
+		textFieldF.setColumns(10);
+		
+		JButton btnAlterarFiltroF = new JButton("Alterar Filtro");
 		GroupLayout gl_panelFacebook = new GroupLayout(panelFacebook);
 		gl_panelFacebook.setHorizontalGroup(
 			gl_panelFacebook.createParallelGroup(Alignment.LEADING)
@@ -199,12 +238,25 @@ public class Gui extends JFrame {
 					.addComponent(scrollPane_2, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
 					.addGap(2)
 					.addComponent(scrollPane_3, GroupLayout.PREFERRED_SIZE, 203, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(127, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panelFacebook.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnActualizarF)
+						.addComponent(textFieldF, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnAlterarFiltroF))
+					.addContainerGap(32, Short.MAX_VALUE))
 		);
 		gl_panelFacebook.setVerticalGroup(
 			gl_panelFacebook.createParallelGroup(Alignment.LEADING)
 				.addComponent(scrollPane_3, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
 				.addComponent(scrollPane_2, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
+				.addGroup(gl_panelFacebook.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(btnActualizarF)
+					.addGap(18)
+					.addComponent(textFieldF, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(btnAlterarFiltroF)
+					.addContainerGap(202, Short.MAX_VALUE))
 		);
 		
 		JTextArea areaPosts = new JTextArea();
@@ -221,7 +273,13 @@ public class Gui extends JFrame {
 		
 		JScrollPane scrollPane_5 = new JScrollPane();
 		
-		btnActualizar = new JButton("Actualizar");
+		btnActualizarT = new JButton("Actualizar");
+		
+		JTextField txtFiltroT = new JTextField();
+		txtFiltroT.setText("Filtro");
+		txtFiltroT.setColumns(10);
+		
+		JButton btnAlterarFiltroT = new JButton("Alterar Filtro");
 		
 		GroupLayout gl_panelTwitter = new GroupLayout(panelTwitter);
 		gl_panelTwitter.setHorizontalGroup(
@@ -231,15 +289,22 @@ public class Gui extends JFrame {
 					.addGap(1)
 					.addComponent(scrollPane_5, GroupLayout.PREFERRED_SIZE, 206, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnActualizar, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(20, Short.MAX_VALUE))
+					.addGroup(gl_panelTwitter.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnActualizarT, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
+						.addComponent(txtFiltroT, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnAlterarFiltroT))
+					.addContainerGap(44, Short.MAX_VALUE))
 		);
 		gl_panelTwitter.setVerticalGroup(
 			gl_panelTwitter.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelTwitter.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(btnActualizar)
-					.addContainerGap(31, Short.MAX_VALUE))
+					.addComponent(btnActualizarT)
+					.addGap(33)
+					.addComponent(txtFiltroT, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnAlterarFiltroT)
+					.addContainerGap(192, Short.MAX_VALUE))
 				.addGroup(gl_panelTwitter.createSequentialGroup()
 					.addGap(1)
 					.addComponent(scrollPane_4, GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE))
