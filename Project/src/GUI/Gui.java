@@ -30,7 +30,7 @@ import javax.swing.JTextArea;
 public class Gui extends JFrame {
 	private DefaultListModel<String> model = new DefaultListModel<>();
 	private JPanel contentPane1;
-	private JButton btnActualizar;
+	private JButton btnActualizar= new JButton("Actualizar");
 	private static TwitterApp twitter;
 	JList listaTweets = new JList(model);
 	String selecao;
@@ -176,6 +176,7 @@ public class Gui extends JFrame {
 			gl_panelEmail.createParallelGroup(Alignment.LEADING)
 				.addComponent(scrollPane_1, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
 				.addComponent(scrollPane, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
+				
 		);
 		
 		JList listaEmails = new JList<>();
@@ -221,7 +222,7 @@ public class Gui extends JFrame {
 		
 		JScrollPane scrollPane_5 = new JScrollPane();
 		
-		btnActualizar = new JButton("Actualizar");
+		
 		
 		GroupLayout gl_panelTwitter = new GroupLayout(panelTwitter);
 		gl_panelTwitter.setHorizontalGroup(
