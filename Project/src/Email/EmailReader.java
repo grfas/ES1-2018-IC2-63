@@ -24,7 +24,7 @@ import twitter4j.Status;
 
 public class EmailReader {
 	public List<MessagePrint> MensagemDoIscte = new ArrayList<MessagePrint>();
-	private String filtroEmail="ISCTE-IUL";
+	private String filtroEmail=null;
 
 	public String getFiltroEmail() {
 		return filtroEmail;
@@ -94,7 +94,7 @@ public class EmailReader {
 					if (i < 50) {
 						i++;
 						String result = b.split(" ")[0];
-						if (result.equals(filtroEmail)) {
+						if (result.equals(filtroEmail) || filtroEmail.equals(null)) {
 							System.out.println("From:" + a);
 							System.out.println("Title: " + message.getSubject());
 

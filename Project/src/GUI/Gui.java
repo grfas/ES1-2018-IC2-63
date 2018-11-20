@@ -174,7 +174,7 @@ public class Gui extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				email.setFiltroEmail(textFieldE.getText());
 				email.readEmails(true);
-				System.out.println("Filtro"+ email.getFiltroEmail());
+				System.out.println("filtro"+ email.getFiltroEmail());
 
 				System.out.println("button filtro email clicked!");
 
