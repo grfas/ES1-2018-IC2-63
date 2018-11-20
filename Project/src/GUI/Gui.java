@@ -104,6 +104,10 @@ public class Gui extends JFrame {
 
 	}
 
+	/**
+	 * atualização da lista de status/tweets
+	 * 
+	 */
 	private void relistTweets() {
 
 		for(Status s : twitter.getListaTweets()){
@@ -115,7 +119,10 @@ public class Gui extends JFrame {
 	}
 	
 
-	private void relistEmails() {
+	/**
+	 * atualização da lista emails 
+	 */
+	private void relistaEmails() {
 
 		for(MessagePrint s : email.getMensagemDoIscte()){
 			model.addElement(s.getFrom() + " - "+s.getTitulo());

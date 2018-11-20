@@ -8,6 +8,11 @@ public class MessagePrint {
 	private String titulo;
 	private String texto;
 	
+	/**Imprime as mensagens que vem do email
+	 * @param from 
+	 * @param titulo
+	 * @param texto
+	 */
 	public MessagePrint(Address from,String titulo, String texto) {
 		this.from=from;
 		this.titulo = titulo;

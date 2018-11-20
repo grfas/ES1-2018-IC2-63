@@ -18,6 +18,9 @@ public class TwitterApp {
 
 	}
 
+	/**inicia a conexão com a api do twitter
+	 * @throws TwitterException
+	 */
 	public void initTwitter() throws TwitterException{
 
 

@@ -8,6 +8,10 @@ import com.restfb.types.Post;
 
 
 
+/**
+ * @author Francisco
+ *Class customizavel para utilizadores do Facebook
+ */
 public class CustomUser {
 	
 	@Facebook("post")

@@ -16,6 +16,9 @@ import Facebook.CustomUser;
 
 public class InicializadorFacebook {
 
+	/**
+	 * Inicia a conexão com a api do facebook, através do token de acesso
+	 */
 	public void IniciaFace() {
 		FacebookClient facebookClient = new DefaultFacebookClient(Constantes.MY_ACCESS_TOKEN, Version.LATEST);
 

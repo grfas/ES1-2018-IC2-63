@@ -3,6 +3,10 @@ package Facebook;
 
 import com.restfb.Facebook;
 
+/**
+ * @author Francisco
+ *Class customizavel de uma página de Facebook
+ */
 public class CustomPage {
 
 	@Facebook("first_name")
