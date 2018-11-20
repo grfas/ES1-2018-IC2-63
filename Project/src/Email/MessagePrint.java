@@ -1,12 +1,14 @@
 package Email;
 
+import javax.mail.Address;
+
 public class MessagePrint {
 	
-	private String from;
+	private Address from;
 	private String titulo;
 	private String texto;
 	
-	public MessagePrint(String from,String titulo, String texto) {
+	public MessagePrint(Address from,String titulo, String texto) {
 		this.from=from;
 		this.titulo = titulo;
 		this.texto = texto;
@@ -28,11 +30,11 @@ public class MessagePrint {
 		this.texto = texto;
 	}
 
-	public String getFrom() {
+	public Address getFrom() {
 		return from;
 	}
 
-	public void setFrom(String from) {
+	public void setFrom(Address from) {
 		this.from = from;
 	}
 	

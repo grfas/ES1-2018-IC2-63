@@ -39,9 +39,8 @@ public class TwitterApp {
 			System.out.println(st.getUser().getName()+" -- "+st.getText());
 
 			estadosDoIscte = twitter.getUserTimeline("iscteiul");
-			for(Status si: estadosDoIscte)
-			{
-				System.out.println(si.getUser().getName()+" -- "+si.getText());
+			for(Status si: estadosDoIscte){
+//				System.out.println(si.getUser().getName()+" -- "+si.getText());
 			}
 		}
 

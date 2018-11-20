@@ -8,6 +8,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import Email.EmailReader;
+import Email.MessagePrint;
 import Twitter.TwitterApp;
 import twitter4j.Status;
 import twitter4j.TwitterException;
@@ -19,6 +21,7 @@ import javax.swing.JButton;
 import javax.swing.JTabbedPane;
 import javax.swing.JList;
 import java.awt.event.ActionListener;
+import java.util.LinkedList;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -30,10 +33,12 @@ import javax.swing.JTextField;
 
 public class Gui extends JFrame {
 	private DefaultListModel<String> model = new DefaultListModel<>();
+	private DefaultListModel<String> modelEmail = new DefaultListModel<>();
 	private JPanel contentPane1;
 	private JButton btnActualizarT;
 	private static TwitterApp twitter;
 	JList listaTweets = new JList(model);
+	JList listaEmails = new JList<>(modelEmail);
 	String selecao;
 	private List<Status> listaEstados;
 	JTextArea areaTweet = new JTextArea();
@@ -41,6 +46,7 @@ public class Gui extends JFrame {
 	private JButton btnActualizarE;
 	private JButton btnAlterarFiltroE;
 	private JTextField textFieldF;
+	private static EmailReader email ;
 	
 	/**
 	 * Launch the application.
@@ -53,33 +59,34 @@ public class Gui extends JFrame {
 		System.out.println("oioi");
 		System.out.println("14:39 - 20/11//2018");
 		
-		
-		
-		twitter= new TwitterApp();
-		try {
-			twitter.initTwitter();
-		} catch (TwitterException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-//		for(Status si: twitter.getListaTweets())
-//		{
-//			System.out.println(si.getUser().getName()+" -- "+si.getText());
-//		}
-		
-		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					
 					Gui frame = new Gui();
 					frame.setVisible(true);
-					frame.relistTweets();
+//					frame.relistTweets();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
+		
+		twitter= new TwitterApp();
+		email= new EmailReader();
+		try {
+			email.readEmails(true);
+			twitter.initTwitter();
+			
+			
+		} catch (TwitterException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		
+		
+		
 	}
 
 	/**
@@ -100,6 +107,16 @@ public class Gui extends JFrame {
 		
 		
 	}
+	
+	private void relistEmails() {
+
+		for(MessagePrint s : email.getMensagemDoIscte()){
+			model.addElement(s.getFrom() + " - "+s.getTitulo());
+			System.out.println(s.getFrom() + " - "+s.getTitulo());
+		}
+		
+		
+	}
 
 	private void events() {
 		
@@ -111,9 +128,33 @@ public class Gui extends JFrame {
 					model.addElement(s.getUser().getName()+ " - "+s.getCreatedAt());
 					
 				}
+				
+				listaTweets = new JList<>(model);
 
 				System.out.println("button clicked!");
-				model.clear();
+				
+				areaTweet.setText(null);
+//				relistTweets();
+				
+
+			}
+		});
+		
+		btnActualizarE.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				modelEmail.clear();
+				System.out.println("lista email"+ email.getMensagemDoIscte());
+				
+				for(MessagePrint s : email.getMensagemDoIscte()){
+					modelEmail.addElement(s.getFrom() + " - "+s.getTitulo());
+					System.out.println(s.getFrom() + " - "+s.getTitulo());
+				}
+				
+				
+
+				System.out.println("button email clicked!");
+				
 				areaTweet.setText(null);
 //				relistTweets();
 				
@@ -141,10 +182,13 @@ public class Gui extends JFrame {
 		});
 	}
 	
+	
 	private void actualizarTweets() {
 		this.listaEstados.clear();
 		this.listaEstados=twitter.getListaTweets();
 	}
+	
+	
 
 	private void init() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -210,7 +254,7 @@ public class Gui extends JFrame {
 					.addContainerGap(192, Short.MAX_VALUE))
 		);
 		
-		JList listaEmails = new JList<>();
+		
 		scrollPaneE.setRowHeaderView(listaEmails);
 		
 		JTextArea areaEmails = new JTextArea();
@@ -314,9 +358,10 @@ public class Gui extends JFrame {
 		);
 		
 		
+		scrollPaneE.setViewportView(areaEmails);
+		scrollPaneE.setViewportView(listaEmails);
+		
 		scrollPane_5.setViewportView(areaTweet);
-		
-		
 		scrollPane_4.setViewportView(listaTweets);
 		panelTwitter.setLayout(gl_panelTwitter);
 		contentPane1.setLayout(gl_contentPane1);

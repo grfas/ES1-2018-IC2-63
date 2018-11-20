@@ -31,22 +31,18 @@ public class EmailReader {
 //	public EmailReader(Gui gui) {
 //		this.gui=gui;
 //	}
-   public static void main(String[] args) {
-	   EmailReader em = new EmailReader();
-	   em.readEmails(true);
-       
-   }
+  
  
    /**
     * Method reads emails from the IMAP or POP3 server.
     * @param isImap - if true then we are reading messages from the IMAP server, if no then read from the POP3 server.
     */
-   private static void readEmails(boolean isImap) {
+   public  void readEmails(boolean isImap) {
        // Create all the needed properties - empty!
        Properties connectionProperties = new Properties();
        // Create the session
        Session session = Session.getDefaultInstance(connectionProperties,null);
-      List<MessagePrint> MensagemDoIscte = new ArrayList<MessagePrint>();
+      
        try {
            System.out.print("Connecting to the IMAP server...");
            // Connecting to the server
@@ -56,7 +52,7 @@ public class EmailReader {
             
            // Set the server depending on the parameter flag value
            String server = isImap ? "imap.outlook.com" : "pop3.outlook.com";
-           store.connect(server,"grfas@iscte-iul.pt","Reconhecimento45.");
+           store.connect(server,"%Mail%","%Pass%");
             
            System.out.println("done!");
             
@@ -94,8 +90,9 @@ public class EmailReader {
                }
                if (content != null) {
 //                 System.out.println(content.toString());
-                 MessagePrint mp = new MessagePrint(message.getFrom().toString(),message.getSubject(), content.toString());
+                 MessagePrint mp = new MessagePrint(a,message.getSubject(), content.toString());
                  MensagemDoIscte.add(mp);
+                 System.out.println("lista emailReader"+ getMensagemDoIscte());
                  
                }
                System.out.println("---");
