@@ -44,7 +44,6 @@ public class InicializadorFacebook {
 				counterTotal++;
 			}
 		}
-		System.out.println("65");
 		System.out.println("-------------\nNº of Results: " + counter5 + "/" + counterTotal);
 
 	}

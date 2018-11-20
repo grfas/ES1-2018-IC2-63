@@ -51,7 +51,7 @@ public class Gui extends JFrame {
 		
 		
 		System.out.println("oioi");
-		
+		System.out.println("14:39 - 20/11//2018");
 		
 		
 		
