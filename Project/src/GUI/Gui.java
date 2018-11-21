@@ -23,6 +23,8 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.LinkedList;
 import java.util.List;
 import java.awt.event.ActionEvent;
@@ -144,7 +146,7 @@ public class Gui extends JFrame {
 
 				}
 
-				listaTweets = new JList<>(model);
+//				listaTweets = new JList<>(model);
 
 				System.out.println("button clicked!");
 
@@ -189,17 +191,36 @@ public class Gui extends JFrame {
 			}
 		});
 
+//		listaTweets.addMouseListener(new MouseAdapter() {
+//			  public void mouseClicked(MouseEvent evt) {
+//			   if (evt.getClickCount() == 1) {
+//			    int index = listaTweets.locationToIndex(evt.getPoint());
+//			    for(int i=0; i<model.size(); i++) {
+//			    	if(i==index) {
+//			    		if(selectedValue.equals(s.getUser().getName()+ " - "+s.getCreatedAt())){
+//							areaTweet.setText(null);
+//							areaTweet.setText(s.getText()); 	
+//						}
+//			    	}
+//			    }
+////			    twitter.imprimeIndex(index);
+////			    indiceTwitter = index;
+//			   }
+//			  }
+//			 });
 
+
+		
 		listaTweets.addListSelectionListener(new ListSelectionListener() {
 
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
-
+				areaTweet.setText(null);
 				String selectedValue = (String) listaTweets.getSelectedValue();
-				System.out.println(selectedValue);
+				System.out.println("lolo" + listaTweets.getSelectedValue());
 				for(Status s : twitter.getListaTweets()) {
 					if(selectedValue.equals(s.getUser().getName()+ " - "+s.getCreatedAt())){
-						areaTweet.setText(null);
+						
 						areaTweet.setText(s.getText()); 	
 					}
 				}

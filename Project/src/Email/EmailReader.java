@@ -91,10 +91,10 @@ public class EmailReader {
 			for (Message message : messages) {
 				for (Address a : message.getFrom()) {
 					String b = a.toString();
-					if (i < 50) {
+					if (i < 25) {
 						i++;
 						String result = b.split(" ")[0];
-						if (result.equals(filtroEmail) || filtroEmail.equals(null)) {
+//						if (result.equals(filtroEmail) || filtroEmail.equals(null)) {
 							System.out.println("From:" + a);
 							System.out.println("Title: " + message.getSubject());
 
@@ -116,7 +116,7 @@ public class EmailReader {
 
 							}
 							System.out.println("---");
-						}
+//						}
 					} else {
 						System.out.println("Não existem mais mensagens recentes");
 						return;
