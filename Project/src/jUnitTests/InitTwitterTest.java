@@ -1,5 +1,5 @@
 
-package Junit;
+package jUnitTests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
