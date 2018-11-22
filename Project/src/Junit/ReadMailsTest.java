@@ -1,8 +1,10 @@
-package Email;
+package Junit;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+
+import Email.EmailReader;
 
 class ReadMailsTest {
 

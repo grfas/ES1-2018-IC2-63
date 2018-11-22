@@ -1,8 +1,10 @@
-package Facebook;
+package Junit;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+
+import Facebook.InicializadorFacebook;
 
 
 
