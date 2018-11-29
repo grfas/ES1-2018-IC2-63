@@ -47,7 +47,47 @@ public class TwitterApp {
 			}
 		}
 
+		public void retweetar() {
+			TwitterFactory tf1 = new TwitterFactory();
+			Twitter twitter = tf1.getInstance();
+			twitter.setOAuthConsumer("4rJVbcVIboahTgUlsd7oOFwDd", "wbHgBD2qAJwZpLacQF9wICwnP79UUEvbQ2D1C9SS74KHl79vdW");
+			AccessToken accessToken = new AccessToken("159232832-8BKv6atg6nF2YVsAwUvoj2y4KTXsytriJt9eWCa5", "ndoKlk7Tp5rv7aMVVvtgfNj5FxDNeTnRpQdgWJ0KdBMLb");
+			twitter.setOAuthAccessToken("159232832-8BKv6atg6nF2YVsAwUvoj2y4KTXsytriJt9eWCa5");
+			twitter.retweetStatus(getTweetId());
+
+		}
+
+		public void favoritar() throws TwitterException {
+			TwitterFactory factory = new TwitterFactory();
+
+			Twitter twitter = factory.getInstance();
+			twitter.setOAuthConsumer("4rJVbcVIboahTgUlsd7oOFwDd", "wbHgBD2qAJwZpLacQF9wICwnP79UUEvbQ2D1C9SS74KHl79vdW");
+			AccessToken accessToken = new AccessToken("159232832-8BKv6atg6nF2YVsAwUvoj2y4KTXsytriJt9eWCa5", "ndoKlk7Tp5rv7aMVVvtgfNj5FxDNeTnRpQdgWJ0KdBMLb");
+			twitter.setOAuthAccessToken(accessToken);
+			Status status = twitter.createFavorite(getTweetId());	 
+
+		}
+
+		public void responder() {
+			TwitterFactory factory = new TwitterFactory();
+
+			Twitter twitter = factory.getInstance();
+			twitter.setOAuthConsumer("4rJVbcVIboahTgUlsd7oOFwDd", "wbHgBD2qAJwZpLacQF9wICwnP79UUEvbQ2D1C9SS74KHl79vdW");
+			AccessToken accessToken = new AccessToken("159232832-8BKv6atg6nF2YVsAwUvoj2y4KTXsytriJt9eWCa5", "ndoKlk7Tp5rv7aMVVvtgfNj5FxDNeTnRpQdgWJ0KdBMLb");
+			twitter.setOAuthAccessToken("159232832-8BKv6atg6nF2YVsAwUvoj2y4KTXsytriJt9eWCa5");
+			String replyMessage; //implementar um scanner?
+			StatusUpdate statusUpdate = new StatusUpdate(replyMessage);
+			long inReplyToStatusId;
+			statusUpdate.setInReplyToStatusId(inReplyToStatusId);
+			Status status = twitter.updateStatus(statusUpdate);
+		}
 
 
+		public long getTweetId() { //help com isto sff
+			long tweetId = 0; //preciso de alterar isto
+			return tweetId;
+		}
+
+	
 	}
 }
