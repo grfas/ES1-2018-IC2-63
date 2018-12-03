@@ -42,7 +42,7 @@ import javax.swing.JTextField;
 public class Gui extends JFrame {
 	private DefaultListModel<String> model = new DefaultListModel<>();
 	private DefaultListModel<String> modelEmail = new DefaultListModel<>();
-	private DefaultListModel<String>modelFacebook = new DefaultListModel<>();
+	private DefaultListModel<String> modelFacebook = new DefaultListModel<>();
 	private JPanel contentPane1;
 	private JButton btnActualizarT;
 	private static TwitterApp twitter;
@@ -142,9 +142,10 @@ public class Gui extends JFrame {
 		
 
 	}
+	
 	private void relistaFacebookPosts() {
 		for(Post p : facebook.getMensagemDoIscte()) {
-			modelFacebook.addElement(p.getFrom()+ " - "+p.getCaption());
+			modelFacebook.addElement((p.getFrom())+ " - "+p.getCaption());
 			System.out.println(p.getFrom() + " - "+p.getCaption());
 		}
 	}
@@ -160,7 +161,7 @@ public class Gui extends JFrame {
 				modelFacebook.clear();
 				for (Post p : facebook.getMensagemDoIscte()) {
 					model.addElement(p.getFrom().getName()+ " - "+p.getCaption());
-					System.out.println(model.getElementAt(1));
+					System.out.println(p.getFrom().getName()+ " - "+p.getCaption());
 				}
 				areaTweet.setText(null);
 				
@@ -224,23 +225,7 @@ public class Gui extends JFrame {
 			}
 		});
 
-//		listaTweets.addMouseListener(new MouseAdapter() {
-//			  public void mouseClicked(MouseEvent evt) {
-//			   if (evt.getClickCount() == 1) {
-//			    int index = listaTweets.locationToIndex(evt.getPoint());
-//			    for(int i=0; i<model.size(); i++) {
-//			    	if(i==index) {
-//			    		if(selectedValue.equals(s.getUser().getName()+ " - "+s.getCreatedAt())){
-//							areaTweet.setText(null);
-//							areaTweet.setText(s.getText()); 	
-//						}
-//			    	}
-//			    }
-////			    twitter.imprimeIndex(index);
-////			    indiceTwitter = index;
-//			   }
-//			  }
-//			 });
+
 
 		listaFacebookposts.addListSelectionListener(new ListSelectionListener() {
 
@@ -424,8 +409,8 @@ public class Gui extends JFrame {
 		JTextArea areaPosts = new JTextArea();
 		scrollPane_3.setViewportView(areaPosts);
 
-		JList listaPosts = new JList();
-		scrollPane_2.setViewportView(listaPosts);
+//		JList listaPosts = new JList(modelFacebook);
+		scrollPane_2.setViewportView(listaFacebookposts);
 		panelFacebook.setLayout(gl_panelFacebook);
 
 		JPanel panelTwitter = new JPanel();
@@ -442,7 +427,9 @@ public class Gui extends JFrame {
 		txtFiltroT.setColumns(10);
 
 		JButton btnAlterarFiltroT = new JButton("Alterar Filtro");
-
+		/* 
+		 * Painel do Twitter
+		 */
 		GroupLayout gl_panelTwitter = new GroupLayout(panelTwitter);
 		gl_panelTwitter.setHorizontalGroup(
 				gl_panelTwitter.createParallelGroup(Alignment.LEADING)

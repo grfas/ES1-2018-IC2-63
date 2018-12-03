@@ -55,6 +55,7 @@ public class InicializadorFacebook {
 		System.out.println("-------------\nNº of Results: " + counter5 + "/" + counterTotal);
 
 	}
+	
 	public List<Post> getMensagemDoIscte() {
 		return MensagemDoIscte;
 	}
