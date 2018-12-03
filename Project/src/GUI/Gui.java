@@ -249,7 +249,7 @@ public class Gui extends JFrame {
 				for(Post p : facebook.getMensagemDoIscte()) {
 					if(selectedValue.equals(p.getMessage() +" - "+p.getCaption())){
 						
-						areaTweet.setText(p.getMessage()); 	
+						areaFacebook.setText(p.getMessage()); 	
 					}
 				}
 
