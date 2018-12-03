@@ -49,13 +49,14 @@ public class TwitterApp {
 		}
 	}
 	/**permite retweetar(repostar) um tweet
+	 * @throws TwitterException 
 	 */
-	public void retweetar() {
+	public void retweetar() throws TwitterException {
 		TwitterFactory tf1 = new TwitterFactory();
 		Twitter twitter = tf1.getInstance();
 		twitter.setOAuthConsumer("4rJVbcVIboahTgUlsd7oOFwDd", "wbHgBD2qAJwZpLacQF9wICwnP79UUEvbQ2D1C9SS74KHl79vdW");
 		AccessToken accessToken = new AccessToken("159232832-8BKv6atg6nF2YVsAwUvoj2y4KTXsytriJt9eWCa5", "ndoKlk7Tp5rv7aMVVvtgfNj5FxDNeTnRpQdgWJ0KdBMLb");
-		twitter.setOAuthAccessToken("159232832-8BKv6atg6nF2YVsAwUvoj2y4KTXsytriJt9eWCa5");
+		twitter.setOAuthAccessToken(accessToken);
 		twitter.retweetStatus(getTweetId());
 
 	}
@@ -80,7 +81,7 @@ public class TwitterApp {
 		Twitter twitter = factory.getInstance();
 		twitter.setOAuthConsumer("4rJVbcVIboahTgUlsd7oOFwDd", "wbHgBD2qAJwZpLacQF9wICwnP79UUEvbQ2D1C9SS74KHl79vdW");
 		AccessToken accessToken = new AccessToken("159232832-8BKv6atg6nF2YVsAwUvoj2y4KTXsytriJt9eWCa5", "ndoKlk7Tp5rv7aMVVvtgfNj5FxDNeTnRpQdgWJ0KdBMLb");
-		twitter.setOAuthAccessToken("159232832-8BKv6atg6nF2YVsAwUvoj2y4KTXsytriJt9eWCa5");
+		twitter.setOAuthAccessToken(accessToken);
 		String replyMessage; //implementar um scanner?
 		StatusUpdate statusUpdate = new StatusUpdate(replyMessage);
 		long inReplyToStatusId;
