@@ -22,5 +22,11 @@ class InitTwiterTest {
 
 	}
 	
-	
+	@Test
+	void testGetConsumerApiKey() {
+		TwitterApp ta = new TwitterApp();
+		String consumerApiKey=ta.getConsumerApiKey();
+		assertEquals(consumerApiKey, "4rJVbcVIboahTgUlsd7oOFwDd");
+		
+	}
 }
