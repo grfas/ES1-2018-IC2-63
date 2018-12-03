@@ -157,10 +157,13 @@ public class Gui extends JFrame {
 
 			
 			public void actionPerformed(ActionEvent arg0) {
+				modelFacebook.clear();
 				for (Post p : facebook.getMensagemDoIscte()) {
-					model.addElement(p.getMessage()+ " - "+p.getCaption());
+					model.addElement(p.getFrom().getName()+ " - "+p.getCaption());
+					System.out.println(model.getElementAt(1));
 				}
-				areaFacebook.setText(null);
+				areaTweet.setText(null);
+				
 			}
 			
 		});
@@ -247,7 +250,7 @@ public class Gui extends JFrame {
 				String selectedValue = (String) listaFacebookposts.getSelectedValue();
 				System.out.println("lolo" + listaFacebookposts.getSelectedValue());
 				for(Post p : facebook.getMensagemDoIscte()) {
-					if(selectedValue.equals(p.getMessage() +" - "+p.getCaption())){
+					if(selectedValue.equals(p.getFrom() +" - "+p.getCaption())){
 						
 						areaFacebook.setText(p.getMessage()); 	
 					}
