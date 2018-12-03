@@ -21,4 +21,6 @@ class InitTwiterTest {
 		return System.out.printf( accessToken + accessTokenSecret);
 
 	}
+	
+	
 }
