@@ -95,6 +95,7 @@ public class EmailReader {
 						i++;
 						String result = b.split(" ")[0];
 //						if (result.equals(filtroEmail) || filtroEmail.equals(null)) {
+						//if (result.equals(filtroEmail) || filtroEmail.equals(null)) {
 							System.out.println("From:" + a);
 							System.out.println("Title: " + message.getSubject());
 
