@@ -8,8 +8,12 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import com.restfb.Facebook;
+import com.restfb.types.Post;
+
 import Email.EmailReader;
 import Email.MessagePrint;
+import Facebook.InicializadorFacebook;
 import Twitter.TwitterApp;
 import twitter4j.Status;
 import twitter4j.TwitterException;
@@ -38,22 +42,25 @@ import javax.swing.JTextField;
 public class Gui extends JFrame {
 	private DefaultListModel<String> model = new DefaultListModel<>();
 	private DefaultListModel<String> modelEmail = new DefaultListModel<>();
+	private DefaultListModel<String>modelFacebook = new DefaultListModel<>();
 	private JPanel contentPane1;
 	private JButton btnActualizarT;
 	private static TwitterApp twitter;
 	JList listaTweets = new JList(model);
 	JList listaEmails = new JList<>(modelEmail);
+	JList listaFacebookposts= new JList<>(modelFacebook);
 	String selecao;
 	private List<Status> listaEstados;
 	JTextArea areaTweet = new JTextArea();
 	JTextArea areaEmail= new JTextArea();
+	JTextArea areaFacebook = new JTextArea();
 	private JButton btnActualizarF;
 	private JButton btnActualizarE;
 	private JButton btnAlterarFiltroE;
 	private JTextField textFieldF;
 	private JTextField textFieldE;
 	private static EmailReader email ;
-
+	private static InicializadorFacebook facebook;
 	/**
 	 * Launch the application.
 	 * @throws TwitterException 
@@ -82,9 +89,11 @@ public class Gui extends JFrame {
 		String name = JOptionPane.showInputDialog("Introduza o user do email");
 		String pass = JOptionPane.showInputDialog("Introduza a PASS do user");
 		email= new EmailReader(name,pass);
+		facebook= new InicializadorFacebook();
 		try {
 			email.readEmails(true);
 			twitter.initTwitter();
+			facebook.IniciaFace();
 
 
 		} catch (TwitterException e1) {
@@ -132,10 +141,31 @@ public class Gui extends JFrame {
 		}
 		
 
-
+	}
+	private void relistaFacebookPosts() {
+		for(Post p : facebook.getMensagemDoIscte()) {
+			modelFacebook.addElement(p.getFrom()+ " - "+p.getCaption());
+			System.out.println(p.getFrom() + " - "+p.getCaption());
+		}
 	}
 
 	private void events() {
+		
+		
+		
+		btnActualizarF.addActionListener(new ActionListener() {
+
+			
+			public void actionPerformed(ActionEvent arg0) {
+				for (Post p : facebook.getMensagemDoIscte()) {
+					model.addElement(p.getMessage()+ " - "+p.getCaption());
+				}
+				areaFacebook.setText(null);
+			}
+			
+		});
+		
+		
 
 		btnActualizarT.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -209,7 +239,24 @@ public class Gui extends JFrame {
 //			  }
 //			 });
 
+		listaFacebookposts.addListSelectionListener(new ListSelectionListener() {
 
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				areaFacebook.setText(null);
+				String selectedValue = (String) listaFacebookposts.getSelectedValue();
+				System.out.println("lolo" + listaFacebookposts.getSelectedValue());
+				for(Post p : facebook.getMensagemDoIscte()) {
+					if(selectedValue.equals(p.getMessage() +" - "+p.getCaption())){
+						
+						areaTweet.setText(p.getMessage()); 	
+					}
+				}
+
+
+
+			}
+		});
 		
 		listaTweets.addListSelectionListener(new ListSelectionListener() {
 
