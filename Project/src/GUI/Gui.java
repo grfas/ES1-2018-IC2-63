@@ -58,8 +58,10 @@ public class Gui extends JFrame {
 	private JButton btnActualizarF;
 	private JButton btnActualizarE;
 	private JButton btnAlterarFiltroE;
+	private JButton btnAlterarFiltroT;
 	private JTextField textFieldF;
 	private JTextField textFieldE;
+	private JTextField txtFiltroT;
 	private static EmailReader email ;
 	private static InicializadorFacebook facebook;
 	/**
@@ -154,20 +156,18 @@ public class Gui extends JFrame {
 	private void events() {
 		
 		
-		
+			
 		btnActualizarF.addActionListener(new ActionListener() {
-
+			
 			
 			public void actionPerformed(ActionEvent arg0) {
-				modelFacebook.clear();
-				
+				listaFacebookposts.removeAll();
+				facebook.actualizaFace();
 				for (Post p : facebook.getMensagemDoIscte()) {
-					modelFacebook.addElement(p.getFrom().getName()+ " - "+p.getMessage());
-//					jd
-//					System.out.println(p.getNme()+ " - "+p.getMessage());
-//					System.out.println(p.getFrom().getName()+ " - "+p.getCaption());
+					modelFacebook.addElement(p.getId()+ " - "+p.getMessage());
+					
+					
 //					modelFacebook.addElement(p.getFrom().getName()+ " - "+p.getCaption());
-//					System.out.println(p.getFrom().getName()+ " - "+p.getCaption());
 				}
 				
 				areaFacebook.setText(null);
@@ -180,8 +180,13 @@ public class Gui extends JFrame {
 
 		btnActualizarT.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
-				model.clear();
+				listaTweets.removeAll();
+				try {
+					twitter.actualizaTwitter();
+				} catch (TwitterException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				for(Status s : twitter.getListaTweets()){
 					model.addElement(s.getUser().getName()+ " - "+s.getCreatedAt());
 					
@@ -202,6 +207,7 @@ public class Gui extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 
 				modelEmail.clear();
+				
 				System.out.println("lista email"+ email.getMensagemDoIscte());
 
 				for(MessagePrint s : email.getMensagemDoIscte()){
@@ -231,7 +237,30 @@ public class Gui extends JFrame {
 
 			}
 		});
+		
+		btnAlterarFiltroT.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				twitter.setFiltro(txtFiltroT.getText());
+				
+				System.out.println("filtro"+ twitter.getFiltro());
 
+				System.out.println("button filtro twitter clicked!");
+
+
+			}
+		});
+		
+//		btnAlterarFiltroF.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent arg0) {
+//				facebook.setFiltroEmail(textFieldE.getText());
+//				facebook.readEmails(true);
+//				System.out.println("filtro"+ email.getFiltroEmail());
+//
+//				System.out.println("button filtro email clicked!");
+//
+//
+//			}
+//		});
 
 
 		listaFacebookposts.addListSelectionListener(new ListSelectionListener() {
@@ -242,7 +271,7 @@ public class Gui extends JFrame {
 				String selectedValue = (String) listaFacebookposts.getSelectedValue();
 				System.out.println("lolo" + listaFacebookposts.getSelectedValue());
 				for(Post p : facebook.getMensagemDoIscte()) {
-					if(selectedValue.equals(p.getFrom() +" - "+p.getCaption())){
+					if(selectedValue.equals(p.getId()+ " - "+p.getMessage())){
 						
 						areaFacebook.setText(p.getMessage()); 	
 					}
@@ -413,10 +442,10 @@ public class Gui extends JFrame {
 						.addContainerGap(202, Short.MAX_VALUE))
 				);
 
-		JTextArea areaPosts = new JTextArea();
-		scrollPane_3.setViewportView(areaPosts);
+		
+		scrollPane_3.setViewportView(areaFacebook);
 
-//		JList listaPosts = new JList(modelFacebook);
+
 		scrollPane_2.setViewportView(listaFacebookposts);
 		panelFacebook.setLayout(gl_panelFacebook);
 
@@ -429,11 +458,11 @@ public class Gui extends JFrame {
 
 		btnActualizarT = new JButton("Actualizar");
 
-		JTextField txtFiltroT = new JTextField();
+		txtFiltroT = new JTextField();
 		txtFiltroT.setText("Filtro");
 		txtFiltroT.setColumns(10);
 
-		JButton btnAlterarFiltroT = new JButton("Alterar Filtro");
+		btnAlterarFiltroT = new JButton("Alterar Filtro");
 		/* 
 		 * Painel do Twitter
 		 */

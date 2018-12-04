@@ -20,11 +20,13 @@ import Facebook.CustomUser;
 
 public class InicializadorFacebook {
 	public List<Post> mensagemDoIscte = new ArrayList<Post>();
+	private Connection<Post> myFeed;
+	private FacebookClient facebookClient;
 	/**
 	 * Inicia a conexão com a api do facebook, através do token de acesso
 	 */
 	public void IniciaFace() {
-		FacebookClient facebookClient = new DefaultFacebookClient(Constantes.MY_ACCESS_TOKEN, Version.LATEST);
+		facebookClient = new DefaultFacebookClient(Constantes.MY_ACCESS_TOKEN, Version.LATEST);
 
 		CustomUser user = facebookClient.fetchObject("Me", CustomUser.class,
 				Parameter.with("fields", "id, name, email, first_name, last_name,hometown"));
@@ -34,7 +36,31 @@ public class InicializadorFacebook {
 		System.out.println("Full Name= " + user.getFullName());
 		System.out.println("Email= " + user.getEmail());
 		
-		Connection<Post> myFeed = facebookClient.fetchConnection("me/feed", Post.class);
+		myFeed = facebookClient.fetchConnection("me/feed", Post.class);
+		System.out.println("\nPosts:");
+		int counter5 = 0;
+		int counterTotal = 0;
+		for (List<Post> page : myFeed) {
+			for (Post aPost : page) {
+				// Filters only posts that contain the word "Inform"
+				//if (aPost.getMessage() != null && aPost.getMessage().contains("Direito")) {
+					System.out.println("---- Post " + counter5 + " ----");
+					System.out.println("Id: " + "fb.com/" + aPost.getId());
+					System.out.println("Message: " + aPost.getMessage());
+					//System.out.println("Created: " + aPost.getCreatedTime());
+					mensagemDoIscte.add(aPost);
+					counter5++;
+				//}
+				counterTotal++;
+			}
+		}
+		System.out.println("-------------\nNº of Results: " + counter5 + "/" + counterTotal);
+			System.out.println(mensagemDoIscte.size());
+
+	}
+	
+	public void actualizaFace() {
+		myFeed = facebookClient.fetchConnection("me/feed", Post.class);
 		System.out.println("\nPosts:");
 		int counter5 = 0;
 		int counterTotal = 0;

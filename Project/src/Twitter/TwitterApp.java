@@ -9,7 +9,9 @@ import twitter4j.conf.ConfigurationBuilder;
 public class TwitterApp {
 
 	private List<Status> estadosDoIscte;
-
+	private TwitterFactory tf;
+	private twitter4j.Twitter twitter;
+	private String filtro = "iscteiul";
 	public List<Status> getListaTweets(){
 		return estadosDoIscte;
 	}
@@ -32,8 +34,8 @@ public class TwitterApp {
 		.setOAuthConsumerSecret("wbHgBD2qAJwZpLacQF9wICwnP79UUEvbQ2D1C9SS74KHl79vdW")
 		.setOAuthAccessToken("159232832-8BKv6atg6nF2YVsAwUvoj2y4KTXsytriJt9eWCa5")
 		.setOAuthAccessTokenSecret("ndoKlk7Tp5rv7aMVVvtgfNj5FxDNeTnRpQdgWJ0KdBMLb");
-		TwitterFactory tf = new TwitterFactory(cb.build());
-		twitter4j.Twitter twitter = tf.getInstance();
+		tf = new TwitterFactory(cb.build());
+		twitter = tf.getInstance();
 
 		twitter.getHomeTimeline();
 
@@ -42,12 +44,25 @@ public class TwitterApp {
 		{
 			System.out.println(st.getUser().getName()+" -- "+st.getText());
 
-			estadosDoIscte = twitter.getUserTimeline("iscteiul");
+			estadosDoIscte = twitter.getUserTimeline(filtro);
 			for(Status si: estadosDoIscte){
 				//				System.out.println(si.getUser().getName()+" -- "+si.getText());
 			}
 		}
 	}
+
+	public void actualizaTwitter() throws TwitterException {
+//		List<Status> estadosDaTimeLine = twitter.getHomeTimeline();
+//		for(Status st : estadosDaTimeLine)
+//		{
+//			System.out.println(st.getUser().getName()+" -- "+st.getText());
+//
+//			estadosDoIscte = twitter.getUserTimeline("iscteiul");
+//			
+//		}
+		estadosDoIscte = twitter.getUserTimeline(filtro);
+	}
+
 	/**permite retweetar(repostar) um tweet
 	 * @throws TwitterException 
 	 */
@@ -60,7 +75,7 @@ public class TwitterApp {
 		twitter.retweetStatus(getTweetId());
 
 	}
-	
+
 	/**permite favoritar (colocar "gosto" num tweet
 	 */
 	public  void favoritar() throws TwitterException {
@@ -72,7 +87,7 @@ public class TwitterApp {
 		twitter.setOAuthAccessToken(accessToken);
 		Status status = twitter.createFavorite(getTweetId());	 
 	}
-	
+
 	/**permite responder a um tweet
 	 */
 	public void responder() {
@@ -88,13 +103,22 @@ public class TwitterApp {
 		statusUpdate.setInReplyToStatusId(inReplyToStatusId);
 		Status status = twitter.updateStatus(statusUpdate);
 	}
-	
+
 	/**devolve um id(chave de identificação) associado a um tweet específico
 	 */
 	public long getTweetId() { //help com isto sff
 		long tweetId = 0; //preciso de alterar isto
 		return tweetId;
 	}
+	
+	public void setFiltro(String filtro) {
+		this.filtro=filtro;
+	}
+	
+	public String getFiltro() {
+		return this.filtro;
+	}
+	
 	
 
 }
