@@ -163,8 +163,8 @@ public class Gui extends JFrame {
 				
 				for (Post p : facebook.getMensagemDoIscte()) {
 					modelFacebook.addElement(p.getFrom().getName()+ " - "+p.getMessage());
-//					jdj
-//					System.out.println(p.getName()+ " - "+p.getMessage());
+//					jd
+//					System.out.println(p.getNme()+ " - "+p.getMessage());
 //					System.out.println(p.getFrom().getName()+ " - "+p.getCaption());
 //					modelFacebook.addElement(p.getFrom().getName()+ " - "+p.getCaption());
 //					System.out.println(p.getFrom().getName()+ " - "+p.getCaption());
