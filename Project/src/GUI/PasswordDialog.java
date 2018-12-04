@@ -11,24 +11,18 @@ import javax.swing.JLabel;
 import java.awt.GridLayout;
 import java.util.Arrays;
 import java.awt.EventQueue;
-public class PasswordDialog {
+public class PasswordDialog extends Thread{
 	//Note: Typically the main method will be in a
 	//separate class. As this is a simple one class
 	//example it's all in the one class.
-	public static void main(String[] args) {
-		//Use the event dispatch thread for Swing components
-		EventQueue.invokeLater(new Runnable()
-		{
-			@Override
-			public void run()
-			{
-				createGuiFrame();
-			}
-		});
-	}
-	//handles the creation of the JFrame and
-	//all it's components
-	private static void createGuiFrame()
+
+	private String password;
+	private String userName;
+
+
+	//	handles the creation of the JFrame and
+	//	all it's components
+	public  void createGuiFrame()
 	{
 		JFrame guiFrame = new JFrame();
 		//make sure the program exits when the frame closes
@@ -65,19 +59,20 @@ public class PasswordDialog {
 			//Retrieve password
 			char[] enteredPassword = passwordFld.getPassword();
 			tracker.append("\nPassword entered was: " + String.valueOf(enteredPassword));
-			if (Arrays.equals(correctPassword, enteredPassword))
-			{
-				tracker.append("\nThe password entered is correct!");
-			}
-			else
-			{
-				tracker.append("\nCall security - it's an imposter!");
-			}
+			//			if (Arrays.equals(correctPassword, enteredPassword))
+			//			{
+			//				tracker.append("\nThe password entered is correct!");
+			//			}
+			//			else
+			//			{
+			//				tracker.append("\nCall security - it's an imposter!");
+			//			}
 			//Note: best practice is to zero out the array
 			//that contains the password. (Bit silly here
 			//as I'm printing the password to show how it's retrived
 			//but keep it in mind when using JPasswordFields.)
 			Arrays.fill(enteredPassword, '0');
+
 		}
 		else
 		{
@@ -85,5 +80,16 @@ public class PasswordDialog {
 			//has been pressed
 			tracker.append("\nDialog cancelled..");
 		}
+	}
+
+
+
+	public String getUsername() {
+		return this.userName;
+
+	}
+
+	public String getPassword() {
+		return this.password;
 	}
 }
