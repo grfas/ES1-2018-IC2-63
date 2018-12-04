@@ -36,27 +36,7 @@ public class InicializadorFacebook {
 		System.out.println("Full Name= " + user.getFullName());
 		System.out.println("Email= " + user.getEmail());
 		
-		myFeed = facebookClient.fetchConnection("me/feed", Post.class);
-		System.out.println("\nPosts:");
-		int counter5 = 0;
-		int counterTotal = 0;
-		for (List<Post> page : myFeed) {
-			for (Post aPost : page) {
-				// Filters only posts that contain the word "Inform"
-				//if (aPost.getMessage() != null && aPost.getMessage().contains("Direito")) {
-					System.out.println("---- Post " + counter5 + " ----");
-					System.out.println("Id: " + "fb.com/" + aPost.getId());
-					System.out.println("Message: " + aPost.getMessage());
-					//System.out.println("Created: " + aPost.getCreatedTime());
-					mensagemDoIscte.add(aPost);
-					counter5++;
-				//}
-				counterTotal++;
-			}
-		}
-		System.out.println("-------------\nNº of Results: " + counter5 + "/" + counterTotal);
-			System.out.println(mensagemDoIscte.size());
-
+		actualizaFace();
 	}
 	
 	public void actualizaFace() {
