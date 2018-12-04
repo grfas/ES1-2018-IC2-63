@@ -19,7 +19,7 @@ import Facebook.Constantes;
 import Facebook.CustomUser;
 
 public class InicializadorFacebook {
-	public List<Post> MensagemDoIscte = new ArrayList<Post>();
+	public List<Post> mensagemDoIscte = new ArrayList<Post>();
 	/**
 	 * Inicia a conexão com a api do facebook, através do token de acesso
 	 */
@@ -46,18 +46,19 @@ public class InicializadorFacebook {
 					System.out.println("Id: " + "fb.com/" + aPost.getId());
 					System.out.println("Message: " + aPost.getMessage());
 					//System.out.println("Created: " + aPost.getCreatedTime());
-					MensagemDoIscte.add(aPost);
+					mensagemDoIscte.add(aPost);
 					counter5++;
 				//}
 				counterTotal++;
 			}
 		}
 		System.out.println("-------------\nNº of Results: " + counter5 + "/" + counterTotal);
+			System.out.println(mensagemDoIscte.size());
 
 	}
 	
 	public List<Post> getMensagemDoIscte() {
-		return MensagemDoIscte;
+		return mensagemDoIscte;
 	}
 
 }

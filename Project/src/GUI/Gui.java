@@ -46,11 +46,12 @@ public class Gui extends JFrame {
 	private JPanel contentPane1;
 	private JButton btnActualizarT;
 	private static TwitterApp twitter;
-	JList listaTweets = new JList(model);
+	JList listaTweets = new JList<>(model);
 	JList listaEmails = new JList<>(modelEmail);
 	JList listaFacebookposts= new JList<>(modelFacebook);
 	String selecao;
 	private List<Status> listaEstados;
+	private List<String> listaPosts;
 	JTextArea areaTweet = new JTextArea();
 	JTextArea areaEmail= new JTextArea();
 	JTextArea areaFacebook = new JTextArea();
@@ -70,7 +71,7 @@ public class Gui extends JFrame {
 
 
 		System.out.println("oioi");
-		System.out.println("14:39 - 20/11//2018");
+		System.out.println("11:18 - 4/12/2018");
 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -159,11 +160,16 @@ public class Gui extends JFrame {
 			
 			public void actionPerformed(ActionEvent arg0) {
 				modelFacebook.clear();
+				
 				for (Post p : facebook.getMensagemDoIscte()) {
-					model.addElement(p.getFrom().getName()+ " - "+p.getCaption());
-					System.out.println(p.getFrom().getName()+ " - "+p.getCaption());
+					modelFacebook.addElement(p.getFrom().getName()+ " - "+p.getMessage());
+//					System.out.println(p.getName()+ " - "+p.getMessage());
+//					System.out.println(p.getFrom().getName()+ " - "+p.getCaption());
+//					modelFacebook.addElement(p.getFrom().getName()+ " - "+p.getCaption());
+//					System.out.println(p.getFrom().getName()+ " - "+p.getCaption());
 				}
-				areaTweet.setText(null);
+				
+				areaFacebook.setText(null);
 				
 			}
 			
@@ -177,7 +183,7 @@ public class Gui extends JFrame {
 				model.clear();
 				for(Status s : twitter.getListaTweets()){
 					model.addElement(s.getUser().getName()+ " - "+s.getCreatedAt());
-
+					
 				}
 
 //				listaTweets = new JList<>(model);
@@ -207,7 +213,7 @@ public class Gui extends JFrame {
 
 				System.out.println("button email clicked!");
 
-				areaTweet.setText(null);
+				areaEmail.setText(null);
 				//				relistTweets();
 
 
@@ -252,7 +258,7 @@ public class Gui extends JFrame {
 			public void valueChanged(ListSelectionEvent e) {
 				areaTweet.setText(null);
 				String selectedValue = (String) listaTweets.getSelectedValue();
-				System.out.println("lolo" + listaTweets.getSelectedValue());
+				System.out.println("l " + listaTweets.getSelectedValue());
 				for(Status s : twitter.getListaTweets()) {
 					if(selectedValue.equals(s.getUser().getName()+ " - "+s.getCreatedAt())){
 						
