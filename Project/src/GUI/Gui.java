@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -64,15 +65,15 @@ public class Gui extends JFrame {
 	private JTextField txtFiltroT;
 	private static EmailReader email ;
 	private static InicializadorFacebook facebook;
-	private static LoginBox passBox;
+	
 	/**
 	 * Launch the application.
 	 * @throws TwitterException 
 	 */
 	public static void main(String[] args) {
 
-				passBox = new LoginBox();
-				passBox.correLogin();
+//				passBox = new LoginBox();
+//				passBox.correLogin();
 
 		System.out.println("oioi");
 		System.out.println("11:18 - 4/12/2018");
@@ -92,9 +93,12 @@ public class Gui extends JFrame {
 		});
 
 		twitter= new TwitterApp();
-//		String name = JOptionPane.showInputDialog("Introduza o user do email");
-//		String pass = JOptionPane.showInputDialog("Introduza a PASS do user");
-		email= new EmailReader(passBox.getLoginInput(),passBox.getPassInput());
+		String name = JOptionPane.showInputDialog("Introduza o user do email");
+		JPasswordField pwd = new JPasswordField(10);
+		int action = JOptionPane.showConfirmDialog(null, pwd,"Enter Password",JOptionPane.OK_OPTION);
+		if(action < 0)JOptionPane.showMessageDialog(null,"Cancel, X or escape key selected");
+		
+		email= new EmailReader(name,pwd.getText());
 		facebook= new InicializadorFacebook();
 		try {
 			email.readEmails(true);

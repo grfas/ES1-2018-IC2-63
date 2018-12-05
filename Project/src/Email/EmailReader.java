@@ -24,7 +24,7 @@ import twitter4j.Status;
 
 public class EmailReader {
 	public List<MessagePrint> MensagemDoIscte = new ArrayList<MessagePrint>();
-	private String filtroEmail=null;
+	private String filtroEmail="";
 
 	public String getFiltroEmail() {
 		return filtroEmail;
@@ -36,6 +36,11 @@ public class EmailReader {
 
 	public List<MessagePrint> getMensagemDoIscte() {
 		return MensagemDoIscte;
+	}
+	
+	public void clearMessages() {
+		MensagemDoIscte.clear();
+	
 	}
 
 //	public Gui gui;
@@ -95,7 +100,8 @@ public class EmailReader {
 						i++;
 						String result = b.split(" ")[0];
 //						if (result.equals(filtroEmail) || filtroEmail.equals(null)) {
-						//if (result.equals(filtroEmail) || filtroEmail.equals(null)) {
+						if (result.equals(filtroEmail) ) {
+							System.out.println("result"+result);
 							System.out.println("From:" + a);
 							System.out.println("Title: " + message.getSubject());
 
@@ -117,12 +123,36 @@ public class EmailReader {
 
 							}
 							System.out.println("---");
-//						}
+						}else if(filtroEmail.equals("")) {
+							System.out.println("result"+result);
+							System.out.println("From:" + a);
+							System.out.println("Title: " + message.getSubject());
+
+							System.out.println();
+							System.out.println(message.getContent());
+							Object content = message.getContent();
+							if (content instanceof MimeMultipart) {
+								MimeMultipart multipart = (MimeMultipart) content;
+								if (multipart.getCount() > 0) {
+									BodyPart part = multipart.getBodyPart(0);
+									content = part.getContent();
+								}
+							}
+							if (content != null) {
+//                 System.out.println(content.toString());
+								MessagePrint mp = new MessagePrint(a, message.getSubject(), content.toString());
+								MensagemDoIscte.add(mp);
+								System.out.println("lista emailReader" + getMensagemDoIscte());
+
+							}
+							System.out.println("---");
+						}
 					} else {
 						System.out.println("Não existem mais mensagens recentes");
 						return;
 					}
-				}
+					}
+//				}
 
 			}
 
