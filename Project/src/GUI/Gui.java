@@ -64,13 +64,15 @@ public class Gui extends JFrame {
 	private JTextField txtFiltroT;
 	private static EmailReader email ;
 	private static InicializadorFacebook facebook;
+	private static LoginBox passBox;
 	/**
 	 * Launch the application.
 	 * @throws TwitterException 
 	 */
 	public static void main(String[] args) {
 
-
+				passBox = new LoginBox();
+				passBox.correLogin();
 
 		System.out.println("oioi");
 		System.out.println("11:18 - 4/12/2018");
@@ -78,7 +80,8 @@ public class Gui extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-
+					
+					
 					Gui frame = new Gui();
 					frame.setVisible(true);
 					//					frame.relistTweets();
@@ -89,9 +92,9 @@ public class Gui extends JFrame {
 		});
 
 		twitter= new TwitterApp();
-		String name = JOptionPane.showInputDialog("Introduza o user do email");
-		String pass = JOptionPane.showInputDialog("Introduza a PASS do user");
-		email= new EmailReader(name,pass);
+//		String name = JOptionPane.showInputDialog("Introduza o user do email");
+//		String pass = JOptionPane.showInputDialog("Introduza a PASS do user");
+		email= new EmailReader(passBox.getLoginInput(),passBox.getPassInput());
 		facebook= new InicializadorFacebook();
 		try {
 			email.readEmails(true);
