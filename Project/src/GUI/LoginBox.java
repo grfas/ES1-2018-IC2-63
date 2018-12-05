@@ -7,6 +7,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Email.EmailReader;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextField;
@@ -29,11 +32,12 @@ public class LoginBox extends JFrame {
 	private JButton btnLogin;
 	private JPasswordField passwordField;
 	private JTextField emailLog;
-
+	private EmailReader email;
 	
 	
 	
-	public LoginBox() {
+	public LoginBox(EmailReader mail) {
+		this.email=mail;
 		init();
 		events();
 	}
@@ -42,7 +46,7 @@ public class LoginBox extends JFrame {
 	 * Launch the application.
 	 */
 	public void correLogin() {
-		LoginBox frame = new LoginBox();
+		LoginBox frame = new LoginBox(email);
 		frame.setVisible(true);
 	}
 
@@ -51,7 +55,7 @@ public class LoginBox extends JFrame {
 	 */
 	public void init() {
 		setTitle("Login");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 400, 200);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -125,7 +129,8 @@ public class LoginBox extends JFrame {
 				setPassInput(stringValueOfCharArray);
 				
 				System.out.println(stringValueOfCharArray);
-
+				email= new EmailReader(getLoginInput(),getPassInput());
+				email.readEmails(true);
 			}
 
 		});
@@ -147,6 +152,9 @@ public class LoginBox extends JFrame {
 	
 	public void setPassInput(String input) {
 		this.passwordInput=input;
+	}
+	public EmailReader getMail() {
+		return email;
 	}
 	
 }

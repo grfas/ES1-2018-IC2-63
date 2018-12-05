@@ -18,12 +18,12 @@ package Twitter;
 	private twitter4j.Twitter twitter;
 	private String filtro = "iscteiul";
 
+	
 	public String consumerApiKey="WlykUrj8IWMlPgMHpffoTO5ZD";
 	public String apiSecretKey="EnvICCHNRqmOZEjVS5th7haBhvbjoCrVPwNHMpPjcz3uQklWle";
 	public String accessToken="159232832-19nUFvi655cA9TDS7r2zDEbjTnpnhXnTf1sdC5Xk";
 	public String accessTokenSecret="e0OW9UdG62C6OzEHBNTAeVFf4yF8a6mwsI47h5HyQmo7J";
-	public ConfigurationBuilder cb = new ConfigurationBuilder();
-
+	
 	/**
 	 * getListaTweets,
 	 * Getter para uma lista de tweets com estados do iscte.
@@ -33,10 +33,7 @@ package Twitter;
 		return estadosDoIscte;
 	}
 
-//	public TwitterApp(){
-//
-//
-//	}
+
 
 	/**
 	 *initTwitter,
@@ -44,36 +41,34 @@ package Twitter;
 	 * @throws TwitterException
 	 */
 	public void initTwitter() throws TwitterException{
+		ConfigurationBuilder cb = new ConfigurationBuilder();
+
 		cb.setDebugEnabled(true)
 		.setOAuthConsumerKey(consumerApiKey)
 		.setOAuthConsumerSecret( apiSecretKey)
 		.setOAuthAccessToken(accessToken)
 		.setOAuthAccessTokenSecret(accessTokenSecret);
-		TwitterFactory tf = new TwitterFactory(cb.build());
-		twitter4j.Twitter twitter = tf.getInstance();
-		//		TwitterFactory tf1 = new TwitterFactory();
-		//		Twitter twitter = tf1.getInstance();
-		//		twitter.setOAuthConsumer(consumerApiKey, apiSecretKey);
-		//		AccessToken accessToken = new AccessToken("159232832-8BKv6atg6nF2YVsAwUvoj2y4KTXsytriJt9eWCa5", "ndoKlk7Tp5rv7aMVVvtgfNj5FxDNeTnRpQdgWJ0KdBMLb");
-		//		twitter.setOAuthAccessToken(accessToken);
+		tf = new TwitterFactory(cb.build());
+		twitter = tf.getInstance();
+		
 		//É preciso criar os botões na gui e colocar os handlers aqui para retweetar
 
 
 		//------------------------------------------
 
-		twitter.getHomeTimeline();
-
-		List<Status> estadosDaTimeLine = twitter.getHomeTimeline();
-		for(Status st : estadosDaTimeLine)
-		{
-			System.out.println(st.getUser().getName()+" -- "+st.getText());
+//		twitter.getHomeTimeline();
+//
+//		List<Status> estadosDaTimeLine = twitter.getHomeTimeline();
+//		for(Status st : estadosDaTimeLine)
+//		{
+//			System.out.println(st.getUser().getName()+" -- "+st.getText());
 
 			estadosDoIscte = twitter.getUserTimeline(filtro);
-			for(Status si: estadosDoIscte){
-				//				System.out.println(si.getUser().getName()+" -- "+si.getText());
-			}
-
-		}
+//			for(Status si: estadosDoIscte){
+//				//				System.out.println(si.getUser().getName()+" -- "+si.getText());
+//			}
+//
+//		}
 		//Coloco o handler do botão retweetar e chamo a função retweetar dentro do handler mas antes tenho que ver com o tweet selecionado na lista
 
 	}
@@ -85,14 +80,7 @@ package Twitter;
 	 *
 	 */
 	public void actualizaTwitter() throws TwitterException {
-		//		List<Status> estadosDaTimeLine = twitter.getHomeTimeline();
-		//		for(Status st : estadosDaTimeLine)
-		//		{
-		//			System.out.println(st.getUser().getName()+" -- "+st.getText());
-		//
-		//			estadosDoIscte = twitter.getUserTimeline("iscteiul");
-		//			
-		//		}
+		
 		estadosDoIscte = twitter.getUserTimeline(filtro);
 	}
 

@@ -62,6 +62,8 @@ public class EmailReader {
 	 *               no then read from the POP3 server.
 	 */
 	public void readEmails(boolean isImap) {
+		
+		
 		// Create all the needed properties - empty!
 		Properties connectionProperties = new Properties();
 		// Create the session
