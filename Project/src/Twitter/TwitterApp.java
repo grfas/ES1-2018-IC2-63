@@ -4,7 +4,11 @@ package Twitter;
 	import twitter4j.*;
 	import twitter4j.auth.AccessToken;
 	import twitter4j.conf.ConfigurationBuilder;
-
+	/**
+	 * @author Gonçalo Canha
+	 * Classe do twitter
+	 *
+	 */
 
 	public class TwitterApp {
 	
@@ -20,17 +24,23 @@ package Twitter;
 	public String accessTokenSecret="e0OW9UdG62C6OzEHBNTAeVFf4yF8a6mwsI47h5HyQmo7J";
 	public ConfigurationBuilder cb = new ConfigurationBuilder();
 
-
+	/**
+	 * getListaTweets,
+	 * Getter para uma lista de tweets com estados do iscte.
+	 * @return estadosDoIscte, uma lista de tweets relativos ao iscteiul
+	 */
 	public List<Status> getListaTweets(){
 		return estadosDoIscte;
 	}
 
-	public TwitterApp(){
+//	public TwitterApp(){
+//
+//
+//	}
 
-
-	}
-
-	/**inicia a conexão com a api do twitter
+	/**
+	 *initTwitter,
+	 * inicia a conexão com a api do twitter
 	 * @throws TwitterException
 	 */
 	public void initTwitter() throws TwitterException{
@@ -67,9 +77,12 @@ package Twitter;
 		//Coloco o handler do botão retweetar e chamo a função retweetar dentro do handler mas antes tenho que ver com o tweet selecionado na lista
 
 	}
-	/**
+	
+	 /**
 	 * actualizaTwitter,
-	 * Atualiza a lista de tweets com estados relativos a um filtro
+	 * Actualiza a lista de tweets com estados relativos a um filtro
+	 * @throws TwitterException
+	 *
 	 */
 	public void actualizaTwitter() throws TwitterException {
 		//		List<Status> estadosDaTimeLine = twitter.getHomeTimeline();
@@ -84,83 +97,64 @@ package Twitter;
 	}
 
 
-	/**permite retweetar(repostar) um tweet
+	/**
+	 * reweetar, 
+	 * permite retweetar(repostar) um tweet
+	 * @param estado, este estado é o tweet que pretendemos retweetar 
 	 * @throws TwitterException 
 	 */
 	public void retweetar(Status estado) throws TwitterException {
-
-
-
 		long id =estado.getId();
 		twitter.retweetStatus((id));
-
 	}
-	//
-	//	/**permite favoritar (colocar "gosto" num tweet
-	//	 */
-	//	public  void favoritar() throws TwitterException {
-	//		TwitterFactory factory = new TwitterFactory();
-	//
-	//		Twitter twitter = factory.getInstance();
-	//		twitter.setOAuthConsumer(consumerApiKey, apiSecretKey);
-	//		AccessToken accessToken = new AccessToken("159232832-8BKv6atg6nF2YVsAwUvoj2y4KTXsytriJt9eWCa5", "ndoKlk7Tp5rv7aMVVvtgfNj5FxDNeTnRpQdgWJ0KdBMLb");
-	//		twitter.setOAuthAccessToken(accessToken);
-	//		Status status = twitter.createFavorite(getTweetId());	 
-	//	}
-
-	/**permite responder a um tweet
-	 */
-	//	public void responder() {
-	//		TwitterFactory factory = new TwitterFactory();
-	//
-	//		Twitter twitter = factory.getInstance();
-	//		twitter.setOAuthConsumer(consumerApiKey, apiSecretKey);
-	//		AccessToken accessToken = new AccessToken("159232832-8BKv6atg6nF2YVsAwUvoj2y4KTXsytriJt9eWCa5", "ndoKlk7Tp5rv7aMVVvtgfNj5FxDNeTnRpQdgWJ0KdBMLb");
-	//		twitter.setOAuthAccessToken(accessToken);
-	//		String replyMessage; //implementar um scanner?
-	//		StatusUpdate statusUpdate = new StatusUpdate(replyMessage);
-	//		long inReplyToStatusId;
-	//		statusUpdate.setInReplyToStatusId(inReplyToStatusId);
-	//		Status status = twitter.updateStatus(statusUpdate);
-	//	}
+	
 
 	/**Funções que vão ser primariamente usadas para fazer os testes
 >>>>>>> branch 'Development' of https://github.com/grfas/ES1-2018-IC2-63.git
 
 
 	/**
-	 * getCOnsumerApiKey
-	 * Getter para devolve a chave do Consumidor da API (API key)
+	 * getConsumerApiKey,
+	 * Getter que devolve a chave do Consumidor da API (consumerApiKey).
+	 * @return consumerApiKey
 	 */
 	public String getConsumerApiKey() {
 		return consumerApiKey;
 	}
-	/**devolve a chave secreta do Consumidor da API (API secret key)
+	
+	/**
+	 * getApiSecretKey, 
+	 * Getter que devolve a chave secreta do Consumidor da API (apiSecretKey).
+	 * @return apiSecretKey
 	 */
 	public String getApiSecretKey() {
 		return apiSecretKey;
 	}
-	/**devolve a chave de Acesso (Access token)
+	
+	/**
+	 * getAccessToken,
+	 * Getter que devolve a chave de Acesso (accessToken).
+	 * @return getAcessToken
 	 */
 	public String getAccessToken() {
 		return accessToken;
 	}
+	
 	/**
-	 * devolve a chave secreta de acesso (Access token secret)
+	 * getAcessTokenSecret,
+	 * Getter que devolve a chave secreta de acesso (accessTokenSecret).
+	 * @return accessTokenSecret
 	 */
 	public String getAccessTokenSecret() {
 		return accessTokenSecret;
 	}
 
-	//	public boolean isLiked() {
-	//		
-	//	}
 
 
 	/**
 	 * setFiltro,
 	 * Setter for filtro (filter).
-	 * @param filtro this is the filter we want want to apply when displaying tweets
+	 * @param filtro, é o filtro que vamos aplicar aquando da exibição dos tweets.
 	 */
 	public void setFiltro(String filtro) {
 		this.filtro=filtro;
@@ -168,8 +162,8 @@ package Twitter;
 
 	/**
 	 * getFiltro,
-	 * Getter for filtro (filter).
-	 * @return filtro (filter)
+	 * Getter que devolve o filtro (filter).
+	 * @return filtro
 	 */
 	public String getFiltro() {
 		return this.filtro;
