@@ -108,19 +108,19 @@ public class TwitterApp {
 
 	/**permite responder a um tweet
 	 */
-	public void responder() {
-		TwitterFactory factory = new TwitterFactory();
-
-		Twitter twitter = factory.getInstance();
-		twitter.setOAuthConsumer(consumerApiKey, apiSecretKey);
-		AccessToken accessToken = new AccessToken("159232832-8BKv6atg6nF2YVsAwUvoj2y4KTXsytriJt9eWCa5", "ndoKlk7Tp5rv7aMVVvtgfNj5FxDNeTnRpQdgWJ0KdBMLb");
-		twitter.setOAuthAccessToken(accessToken);
-		String replyMessage; //implementar um scanner?
-		StatusUpdate statusUpdate = new StatusUpdate(replyMessage);
-		long inReplyToStatusId;
-		statusUpdate.setInReplyToStatusId(inReplyToStatusId);
-		Status status = twitter.updateStatus(statusUpdate);
-	}
+//	public void responder() {
+//		TwitterFactory factory = new TwitterFactory();
+//
+//		Twitter twitter = factory.getInstance();
+//		twitter.setOAuthConsumer(consumerApiKey, apiSecretKey);
+//		AccessToken accessToken = new AccessToken("159232832-8BKv6atg6nF2YVsAwUvoj2y4KTXsytriJt9eWCa5", "ndoKlk7Tp5rv7aMVVvtgfNj5FxDNeTnRpQdgWJ0KdBMLb");
+//		twitter.setOAuthAccessToken(accessToken);
+//		String replyMessage; //implementar um scanner?
+//		StatusUpdate statusUpdate = new StatusUpdate(replyMessage);
+//		long inReplyToStatusId;
+//		statusUpdate.setInReplyToStatusId(inReplyToStatusId);
+//		Status status = twitter.updateStatus(statusUpdate);
+//	}
 
 	/**Funções que vão ser primariamente usadas para fazer os testes
 >>>>>>> branch 'Development' of https://github.com/grfas/ES1-2018-IC2-63.git

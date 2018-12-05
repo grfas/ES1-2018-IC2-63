@@ -19,10 +19,10 @@ class InitTwiterTest {
 		assertNotNull(junit);
 
 	}
-	PrintStream ConcatenarTokensAcesso( String accessToken, String accessTokenSecret) {
-		return System.out.printf( accessToken + accessTokenSecret);
-
-	}
+//	PrintStream ConcatenarTokensAcesso( String accessToken, String accessTokenSecret) {
+//		return System.out.printf( accessToken + accessTokenSecret);
+//
+//	}
 	
 	@Test
 	void testGetConsumerApiKey() {
@@ -66,6 +66,25 @@ class InitTwiterTest {
 		TwitterApp ta = new TwitterApp();
 		List<Status>estados= ta.getListaTweets();
 		assertEquals(estados, estados);
+	}
+	
+	@Test
+	void testSetFiltro() {
+		System.out.println("setFiltro");
+		String filtro = "iscteiul";
+		TwitterApp ta = new TwitterApp();
+		ta.setFiltro(filtro);
+		assertEquals(ta.getFiltro(), filtro);
+	}
+	
+	@Test
+	void testGetFiltro() {
+		System.out.println("getFiltro");
+		TwitterApp ta = new TwitterApp();
+		String filtro = "iscteiul";
+		ta.setFiltro("iscteiul");
+		String resultado= ta.getFiltro();
+		assertEquals(filtro, resultado);
 	}
 	
 	
