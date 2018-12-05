@@ -65,7 +65,10 @@ public class TwitterApp {
 			}
 		}
 	}
-
+	/**
+	 * actualizaTwitter,
+	 * Atualiza a lista de tweets com estados relativos a um filtro
+	 */
 	public void actualizaTwitter() throws TwitterException {
 //		List<Status> estadosDaTimeLine = twitter.getHomeTimeline();
 //		for(Status st : estadosDaTimeLine)
@@ -78,30 +81,31 @@ public class TwitterApp {
 		estadosDoIscte = twitter.getUserTimeline(filtro);
 	}
 
+	
 	/**permite retweetar(repostar) um tweet
 	 * @throws TwitterException 
 	 */
-	public void retweetar() throws TwitterException {
-		TwitterFactory tf1 = new TwitterFactory();
-		Twitter twitter = tf1.getInstance();
-		twitter.setOAuthConsumer(consumerApiKey, apiSecretKey);
-		AccessToken accessToken = new AccessToken("159232832-8BKv6atg6nF2YVsAwUvoj2y4KTXsytriJt9eWCa5", "ndoKlk7Tp5rv7aMVVvtgfNj5FxDNeTnRpQdgWJ0KdBMLb");
-		twitter.setOAuthAccessToken(accessToken);
-		twitter.retweetStatus(getTweetId());
-
-	}
-
-	/**permite favoritar (colocar "gosto" num tweet
-	 */
-	public  void favoritar() throws TwitterException {
-		TwitterFactory factory = new TwitterFactory();
-
-		Twitter twitter = factory.getInstance();
-		twitter.setOAuthConsumer(consumerApiKey, apiSecretKey);
-		AccessToken accessToken = new AccessToken("159232832-8BKv6atg6nF2YVsAwUvoj2y4KTXsytriJt9eWCa5", "ndoKlk7Tp5rv7aMVVvtgfNj5FxDNeTnRpQdgWJ0KdBMLb");
-		twitter.setOAuthAccessToken(accessToken);
-		Status status = twitter.createFavorite(getTweetId());	 
-	}
+//	public void retweetar() throws TwitterException {
+//		TwitterFactory tf1 = new TwitterFactory();
+//		Twitter twitter = tf1.getInstance();
+//		twitter.setOAuthConsumer(consumerApiKey, apiSecretKey);
+//		AccessToken accessToken = new AccessToken("159232832-8BKv6atg6nF2YVsAwUvoj2y4KTXsytriJt9eWCa5", "ndoKlk7Tp5rv7aMVVvtgfNj5FxDNeTnRpQdgWJ0KdBMLb");
+//		twitter.setOAuthAccessToken(accessToken);
+//		twitter.retweetStatus(getTweetId());
+//
+//	}
+//
+//	/**permite favoritar (colocar "gosto" num tweet
+//	 */
+//	public  void favoritar() throws TwitterException {
+//		TwitterFactory factory = new TwitterFactory();
+//
+//		Twitter twitter = factory.getInstance();
+//		twitter.setOAuthConsumer(consumerApiKey, apiSecretKey);
+//		AccessToken accessToken = new AccessToken("159232832-8BKv6atg6nF2YVsAwUvoj2y4KTXsytriJt9eWCa5", "ndoKlk7Tp5rv7aMVVvtgfNj5FxDNeTnRpQdgWJ0KdBMLb");
+//		twitter.setOAuthAccessToken(accessToken);
+//		Status status = twitter.createFavorite(getTweetId());	 
+//	}
 
 	/**permite responder a um tweet
 	 */
@@ -121,13 +125,20 @@ public class TwitterApp {
 
 	/**Funções que vão ser primariamente usadas para fazer os testes
 >>>>>>> branch 'Development' of https://github.com/grfas/ES1-2018-IC2-63.git
-	/**devolve um id(chave de identificação) associado a um tweet específico
+	
+	/**
+	 * getTweetId
+	 * Getter para o id de um tweet
+	 * @return um id(chave de identificação) associado a um tweet específico
 	 */
+	 
 	public long getTweetId() { //help com isto sff
 		long tweetId = 0; //preciso de alterar isto
 		return tweetId;
 	}
-	/**devolve a chave do Consumidor da API (API key)
+	/**
+	 * getCOnsumerApiKey
+	 * Getter para devolve a chave do Consumidor da API (API key)
 	 */
 	public String getConsumerApiKey() {
 		return consumerApiKey;
@@ -142,7 +153,8 @@ public class TwitterApp {
 	public String getAccessToken() {
 		return accessToken;
 	}
-	/**devolve a chave secreta de acesso (Access token secret)
+	/**
+	 * devolve a chave secreta de acesso (Access token secret)
 	 */
 	public String getAccessTokenSecret() {
 		return accessTokenSecret;
@@ -153,11 +165,20 @@ public class TwitterApp {
 //	}
 	
 	
-	
+	/**
+	 * setFiltro,
+	 * Setter for filtro (filter).
+	 * @param filtro this is the filter we want want to apply when displaying tweets
+	 */
 	public void setFiltro(String filtro) {
 		this.filtro=filtro;
 	}
 	
+	/**
+	 * getFiltro,
+	 * Getter for filtro (filter).
+	 * @return filtro (filter)
+	 */
 	public String getFiltro() {
 		return this.filtro;
 	}
