@@ -12,6 +12,8 @@ import Twitter.TwitterApp;
 import twitter4j.Status;
 
 class InitTwiterTest {
+	
+	TwitterApp ta = new TwitterApp();
 
 	@Test
 	void test() {
@@ -26,14 +28,14 @@ class InitTwiterTest {
 	
 	@Test
 	void testGetConsumerApiKey() {
-		TwitterApp ta = new TwitterApp();
+	
 		String consumerApiKey=ta.getConsumerApiKey();
 		assertEquals(consumerApiKey, "4rJVbcVIboahTgUlsd7oOFwDd");
 		
 	}
 	@Test
 	void testGetApiSecretKey() {
-		TwitterApp ta = new TwitterApp();
+		
 		String apiSecretKey=ta.getApiSecretKey();
 		assertEquals(apiSecretKey, "wbHgBD2qAJwZpLacQF9wICwnP79UUEvbQ2D1C9SS74KHl79vdW");
 		
@@ -41,21 +43,21 @@ class InitTwiterTest {
 	
 	@Test
 	void testGetAccessToken() {
-		TwitterApp ta = new TwitterApp();
+		
 		String accessToken=ta.getAccessToken();
 		assertEquals(accessToken, "159232832-8BKv6atg6nF2YVsAwUvoj2y4KTXsytriJt9eWCa5");
 		
 	}
 	@Test
 	void testGetAccessTokenSecret() {
-		TwitterApp ta = new TwitterApp();
+		
 		String accessTokenSecret=ta.getAccessTokenSecret();
 		assertEquals(accessTokenSecret, "ndoKlk7Tp5rv7aMVVvtgfNj5FxDNeTnRpQdgWJ0KdBMLb");
 		
 	}
 	@Test
 	void testGetTweetId() {  //vai ter que ser alterado consoante a alteração da função get tweet id
-		TwitterApp ta= new TwitterApp();
+		
 		long tweetId=ta.getTweetId();
 		assertEquals(tweetId, 0);
 		
@@ -63,7 +65,7 @@ class InitTwiterTest {
 	
 	@Test
 	void testGetListaTweets() {
-		TwitterApp ta = new TwitterApp();
+		
 		List<Status>estados= ta.getListaTweets();
 		assertEquals(estados, estados);
 	}
@@ -72,7 +74,7 @@ class InitTwiterTest {
 	void testSetFiltro() {
 		System.out.println("setFiltro");
 		String filtro = "iscteiul";
-		TwitterApp ta = new TwitterApp();
+		
 		ta.setFiltro(filtro);
 		assertEquals(ta.getFiltro(), filtro);
 	}
@@ -80,12 +82,30 @@ class InitTwiterTest {
 	@Test
 	void testGetFiltro() {
 		System.out.println("getFiltro");
-		TwitterApp ta = new TwitterApp();
+		
 		String filtro = "iscteiul";
 		ta.setFiltro("iscteiul");
 		String resultado= ta.getFiltro();
 		assertEquals(filtro, resultado);
 	}
 	
+	@Test
+	void testFavoritar() {
+		
+	}
 	
+	@Test
+	void testRetweetar() {
+	
+	}
+	
+	@Test
+	void testActualizaTwitter() {
+
+	}
+	
+	@Test
+	void testInitTwitter() {
+		
+	}
 }

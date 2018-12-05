@@ -18,6 +18,7 @@ public class TwitterApp {
 	public String apiSecretKey="wbHgBD2qAJwZpLacQF9wICwnP79UUEvbQ2D1C9SS74KHl79vdW";
 	public String accessToken="159232832-8BKv6atg6nF2YVsAwUvoj2y4KTXsytriJt9eWCa5";
 	public String accessTokenSecret="ndoKlk7Tp5rv7aMVVvtgfNj5FxDNeTnRpQdgWJ0KdBMLb";
+	public ConfigurationBuilder cb = new ConfigurationBuilder();
 
 
 	public List<Status> getListaTweets(){
@@ -33,10 +34,6 @@ public class TwitterApp {
 	 * @throws TwitterException
 	 */
 	public void initTwitter() throws TwitterException{
-
-
-		ConfigurationBuilder cb = new ConfigurationBuilder();
-
 		cb.setDebugEnabled(true)
 		.setOAuthConsumerKey(consumerApiKey)
 		.setOAuthConsumerSecret( apiSecretKey)
