@@ -56,13 +56,13 @@ class InitTwiterTest {
 		assertEquals(accessTokenSecret, "ndoKlk7Tp5rv7aMVVvtgfNj5FxDNeTnRpQdgWJ0KdBMLb");
 
 	}
-	@Test
-	void testGetTweetId() {  //vai ter que ser alterado consoante a alteração da função get tweet id
-
-		long tweetId=ta.getTweetId();
-		assertEquals(tweetId, 0);
-
-	}
+//	@Test
+//	void testGetTweetId() {  //vai ter que ser alterado consoante a alteração da função get tweet id
+//
+//		long tweetId=ta.getTweetId();
+//		assertEquals(tweetId, 0);
+//
+//	}
 
 	@Test
 	void testGetListaTweets() {
