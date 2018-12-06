@@ -19,6 +19,7 @@ import Facebook.InicializadorFacebook;
 import Twitter.TwitterApp;
 import twitter4j.Status;
 import twitter4j.TwitterException;
+import xmltry.Offline;
 
 import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
@@ -48,12 +49,12 @@ public class Gui extends JFrame {
 	private JPanel contentPane1;
 	private JButton btnActualizarT;
 	private static TwitterApp twitter;
-	JList listaTweets = new JList<>(model);
-	JList listaEmails = new JList<>(modelEmail);
-	JList listaFacebookposts = new JList<>(modelFacebook);
+	JList<String> listaTweets = new JList<>(model);
+	JList<String> listaEmails = new JList<>(modelEmail);
+	JList<String> listaFacebookposts = new JList<>(modelFacebook);
 	String selecao;
 	private List<Status> listaEstados;
-	private List<String> listaPosts;
+	private static List<String> listaPosts;
 	JTextArea areaTweet = new JTextArea();
 	JTextArea areaEmail = new JTextArea();
 	JTextArea areaFacebook = new JTextArea();
@@ -72,12 +73,19 @@ public class Gui extends JFrame {
 	private String emailLog;
 	private String emailPass;
 	private String corpoMensagem;
-
+	private static Offline off;
+	
+	
+	
+	
 	/**
 	 * Launch the application.
 	 * 
 	 * @throws TwitterException
 	 */
+	
+	
+	
 	public static void main(String[] args) {
 
 		System.out.println("oioi");
@@ -103,18 +111,28 @@ public class Gui extends JFrame {
 //		if(action < 0)JOptionPane.showMessageDialog(null,"Cancel, X or escape key selected");
 
 		facebook = new InicializadorFacebook();
+		
 		try {
 
 			twitter.initTwitter();
+			
 			facebook.IniciaFace();
+			//offlineRead();
 
 		} catch (TwitterException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-
+		
+		
 	}
-
+	
+	
+	public static void offlineRead() {
+		System.out.println("olá"+listaPosts.size());
+		for(String f :listaPosts)
+			Offline.convertStringToDocument(f);
+	}
 	public void readMails(String input, String PassInput) {
 		email = new EmailReader(input, PassInput);
 		email.readEmails(true);

@@ -1,4 +1,3 @@
-
 package Facebook;
 
 import java.sql.Date;
@@ -17,6 +16,7 @@ import com.restfb.Version;
 
 import Facebook.Constantes;
 import Facebook.CustomUser;
+import xmltry.Offline;
 
 public class InicializadorFacebook {
 	public List<Post> mensagemDoIscte = new ArrayList<Post>();
@@ -60,6 +60,8 @@ public class InicializadorFacebook {
 		}
 		System.out.println("-------------\nNº of Results: " + counter5 + "/" + counterTotal);
 			System.out.println(mensagemDoIscte.size());
+			
+			
 
 	}
 	
