@@ -10,6 +10,7 @@ import java.util.Properties;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
 import com.restfb.types.Post;
@@ -40,16 +41,18 @@ public class EmailWrite extends JFrame {
 	private JButton btnEnviar;
 	private JTextField destinoEscritaEmail;
 	private JTextField assuntoEscritaEmail;
-	private JTextField textoEscritaEmail;
+	private JTextArea textoEscritaEmail;
 	private String user;
+	private String mensagem;
 	 
 	 private String pass;
 	/**
 	 * Launch the application.
 	 */
-	public EmailWrite(String User,String Pass) {		
+	public EmailWrite(String User,String Pass,String mensagem) {		
 		this.user=User;
 		this.pass=Pass;
+		this.mensagem=mensagem;
 		init();
 		events();
 	}
@@ -91,9 +94,11 @@ public class EmailWrite extends JFrame {
 		
 		assuntoEscritaEmail = new JTextField();
 		assuntoEscritaEmail.setColumns(10);
+
 		
-		textoEscritaEmail = new JTextField();
+		textoEscritaEmail = new JTextArea();
 		textoEscritaEmail.setColumns(10);
+		textoEscritaEmail.setText(mensagem);
 		
 		btnEnviar = new JButton("Enviar");
 		
@@ -149,7 +154,7 @@ public class EmailWrite extends JFrame {
 	      System.out.println("to who "+to1);
 	      System.out.println("Subject why "+Subject1);
 	      System.out.println("Text for what"+Text1);
-	      System.out.println("pass"+ pass);
+	     
 	     
           /** Parâmetros de conexão com servidor Gmail */
 			final String username = from1;
@@ -180,7 +185,7 @@ public class EmailWrite extends JFrame {
 	 
 				Transport.send(message);
 	 
-				System.out.println("Done");
+				System.out.println("Email enviado com sucesso!");
 	 
 			} catch (MessagingException e) {
 				throw new RuntimeException(e);

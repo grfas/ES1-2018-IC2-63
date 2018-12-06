@@ -71,6 +71,7 @@ public class Gui extends JFrame {
 	private static LoginBox passBox;
 	private String emailLog;
 	private String emailPass;
+	private String corpoMensagem;
 
 	/**
 	 * Launch the application.
@@ -258,7 +259,7 @@ public class Gui extends JFrame {
 		btnEscreverEmail.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				System.out.println("emailpass gui"+emailPass);
-				EmailWrite escritaEmail = new EmailWrite(emailLog,emailPass);
+				EmailWrite escritaEmail = new EmailWrite(emailLog,emailPass,"");
 
 				escritaEmail.setVisible(true);
 
@@ -267,7 +268,7 @@ public class Gui extends JFrame {
 
 		btnReencaminharMail.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				EmailWrite escritaEmail = new EmailWrite(emailLog,emailPass);
+				EmailWrite escritaEmail = new EmailWrite(emailLog,emailPass,corpoMensagem);
 				escritaEmail.setVisible(true);
 			}
 		});
@@ -315,6 +316,7 @@ public class Gui extends JFrame {
 				for (MessagePrint mp : email.getMensagemDoIscte()) {
 					if (selectedValue.equals(mp.getFrom() + " - " + mp.getTitulo())) {
 						areaEmail.setText(mp.getTexto());
+						corpoMensagem=mp.getTexto();
 					}
 				}
 			}
