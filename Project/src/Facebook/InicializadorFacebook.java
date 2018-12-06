@@ -20,6 +20,8 @@ import xmltry.Offline;
 
 public class InicializadorFacebook {
 	public List<Post> mensagemDoIscte = new ArrayList<Post>();
+	
+
 	private Connection<Post> myFeed;
 	private FacebookClient facebookClient;
 	/**
@@ -47,14 +49,14 @@ public class InicializadorFacebook {
 		for (List<Post> page : myFeed) {
 			for (Post aPost : page) {
 				// Filters only posts that contain the word "Inform"
-				//if (aPost.getMessage() != null && aPost.getMessage().contains("Direito")) {
+				if (aPost.getMessage() != null && aPost.getMessage().contains("Direito")) {
 					System.out.println("---- Post " + counter5 + " ----");
 					System.out.println("Id: " + "fb.com/" + aPost.getId());
 					System.out.println("Message: " + aPost.getMessage());
 					//System.out.println("Created: " + aPost.getCreatedTime());
 					mensagemDoIscte.add(aPost);
 					counter5++;
-				//}
+				}
 				counterTotal++;
 			}
 		}
@@ -67,6 +69,9 @@ public class InicializadorFacebook {
 	
 	public List<Post> getMensagemDoIscte() {
 		return mensagemDoIscte;
+	}
+	public void setMensagemDoIscte(List<Post> mensagemDoIscte) {
+		this.mensagemDoIscte = mensagemDoIscte;
 	}
 
 }

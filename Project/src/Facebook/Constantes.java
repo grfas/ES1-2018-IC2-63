@@ -8,7 +8,17 @@ package Facebook;
  */
 public class Constantes {
  
-   public static final String REDIRECT_URI
+   public static String getRedirectUri() {
+		return REDIRECT_URI;
+	}
+
+
+	public static String getMyAccessToken() {
+		return MY_ACCESS_TOKEN;
+	}
+
+
+public static final String REDIRECT_URI
                  = "http://localhost:8080/facebookfriends/FriendsListServlet";
  
    
