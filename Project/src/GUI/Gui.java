@@ -69,6 +69,8 @@ public class Gui extends JFrame {
 	private static EmailReader email;
 	private static InicializadorFacebook facebook;
 	private static LoginBox passBox;
+	private String emailLog;
+	private String emailPass;
 
 	/**
 	 * Launch the application.
@@ -140,7 +142,20 @@ public class Gui extends JFrame {
 		}
 
 	}
+	public void setLogUser(String log) {
+		emailLog=log;
+	}
 
+	public String getLogUser() {
+		return emailLog;
+	}
+	public void setLogPass(String Pass) {
+		emailPass=Pass;
+	}
+
+	public String getLogPass() {
+		return emailPass;
+	}
 	/**
 	 * atualização da lista emails
 	 */
@@ -242,7 +257,8 @@ public class Gui extends JFrame {
 
 		btnEscreverEmail.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				EmailWrite escritaEmail = new EmailWrite();
+				System.out.println("emailpass gui"+emailPass);
+				EmailWrite escritaEmail = new EmailWrite(emailLog,emailPass);
 
 				escritaEmail.setVisible(true);
 
@@ -251,10 +267,8 @@ public class Gui extends JFrame {
 
 		btnReencaminharMail.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				EmailWrite escritaEmail = new EmailWrite();
-
+				EmailWrite escritaEmail = new EmailWrite(emailLog,emailPass);
 				escritaEmail.setVisible(true);
-
 			}
 		});
 

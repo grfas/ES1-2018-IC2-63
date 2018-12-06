@@ -8,8 +8,12 @@ import javax.mail.Address;
 import javax.mail.BodyPart;
 import javax.mail.Folder;
 import javax.mail.Message;
+import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Store;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 import GUI.Gui;
@@ -98,7 +102,7 @@ public class EmailReader {
 			for (Message message : messages) {
 				for (Address a : message.getFrom()) {
 					String b = a.toString();
-					if (i < 25) {
+					if (i < 5) {
 						i++;
 						String result = b.split(" ")[0];
 //						if (result.equals(filtroEmail) || filtroEmail.equals(null)) {
@@ -163,4 +167,7 @@ public class EmailReader {
 		}
 
 	}
+	 
+		
+	
 }

@@ -4,6 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.UnsupportedEncodingException;
+import java.util.Date;
+import java.util.Properties;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -11,6 +14,19 @@ import javax.swing.border.EmptyBorder;
 
 import com.restfb.types.Post;
 
+import javax.mail.Address;
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextField;
@@ -22,12 +38,18 @@ public class EmailWrite extends JFrame {
 
 	private JPanel contentPane;
 	private JButton btnEnviar;
+	private JTextField destinoEscritaEmail;
+	private JTextField assuntoEscritaEmail;
+	private JTextField textoEscritaEmail;
+	private String user;
+	 
+	 private String pass;
 	/**
 	 * Launch the application.
 	 */
-	public EmailWrite() {
-		
-		
+	public EmailWrite(String User,String Pass) {		
+		this.user=User;
+		this.pass=Pass;
 		init();
 		events();
 	}
@@ -40,7 +62,14 @@ public class EmailWrite extends JFrame {
 			
 			
 			public void actionPerformed(ActionEvent arg0) {
-				
+				try {
+					sendEmail(user, destinoEscritaEmail.getText(), 
+							assuntoEscritaEmail.getText(), textoEscritaEmail.getText());
+				} catch (MessagingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+//				dispose();
 				
 			}
 			
@@ -57,13 +86,13 @@ public class EmailWrite extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		JTextField destinoEscritaEmail = new JTextField();
+		destinoEscritaEmail = new JTextField();
 		destinoEscritaEmail.setColumns(10);
 		
-		JTextField assuntoEscritaEmail = new JTextField();
+		assuntoEscritaEmail = new JTextField();
 		assuntoEscritaEmail.setColumns(10);
 		
-		JTextField textoEscritaEmail = new JTextField();
+		textoEscritaEmail = new JTextField();
 		textoEscritaEmail.setColumns(10);
 		
 		btnEnviar = new JButton("Enviar");
@@ -111,4 +140,52 @@ public class EmailWrite extends JFrame {
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
+	 public void sendEmail(String from1,String to1, String Subject1, String Text1) throws AddressException, MessagingException {
+			
+
+	      // Assuming you are sending email from localhost
+//	      String host = "localhost";
+	      System.out.println("from who "+from1);
+	      System.out.println("to who "+to1);
+	      System.out.println("Subject why "+Subject1);
+	      System.out.println("Text for what"+Text1);
+	      System.out.println("pass"+ pass);
+	     
+          /** Parâmetros de conexão com servidor Gmail */
+			final String username = from1;
+			final String password = pass;
+	 
+			Properties props = new Properties();
+			props.put("mail.smtp.auth", "true");
+			props.put("mail.smtp.starttls.enable", "true");
+			props.put("mail.smtp.host", "smtp.office365.com");
+			props.put("mail.smtp.port", "587");
+			props.put("mail.smtp.localhost", "127.0.0.1");
+	 
+			Session session = Session.getInstance(props,
+			  new javax.mail.Authenticator() {
+				protected PasswordAuthentication getPasswordAuthentication() {
+					return new PasswordAuthentication(username, password);
+				}
+			  });
+	 
+			try {
+	 
+				Message message = new MimeMessage(session);
+				message.setFrom(new InternetAddress(username));
+				message.setRecipients(Message.RecipientType.TO,
+					InternetAddress.parse(to1));
+				message.setSubject(Subject1);
+				message.setText(Text1);
+	 
+				Transport.send(message);
+	 
+				System.out.println("Done");
+	 
+			} catch (MessagingException e) {
+				throw new RuntimeException(e);
+			}
+		}
+	
+
 }

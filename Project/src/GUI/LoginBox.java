@@ -31,6 +31,7 @@ public class LoginBox extends JFrame {
 	private JButton btnLogin;
 	private JPasswordField passwordField;
 	private JTextField emailLog;
+	
 	private Gui gui;
 
 	public LoginBox(Gui gui) {
@@ -106,7 +107,11 @@ public class LoginBox extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				String stringValueOfCharArray = String.valueOf(passwordField.getPassword());
 				setLoginInput(emailLog.getText());
+				setLoginInput();
+				
 				setPassInput(stringValueOfCharArray);
+				
+				setPassInput();
 				gui.readMails(getLoginInput(), getPassInput());
 				dispose();
 			}
@@ -115,6 +120,13 @@ public class LoginBox extends JFrame {
 
 	public String getLoginInput() {
 		return emailInput;
+	}
+	public void setLoginInput() {
+		gui.setLogUser(getLoginInput());
+	}
+	
+	public void setPassInput() {
+		gui.setLogPass(getPassInput());
 	}
 
 	public String getPassInput() {
