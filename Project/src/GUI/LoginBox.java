@@ -1,6 +1,5 @@
 package GUI;
 
-
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -32,21 +31,19 @@ public class LoginBox extends JFrame {
 	private JButton btnLogin;
 	private JPasswordField passwordField;
 	private JTextField emailLog;
-	private EmailReader email;
-	
-	
-	
-	public LoginBox(EmailReader mail) {
-		this.email=mail;
+	private Gui gui;
+
+	public LoginBox(Gui gui) {
+		this.gui = gui;
 		init();
 		events();
 	}
-	
+
 	/**
 	 * Launch the application.
 	 */
 	public void correLogin() {
-		LoginBox frame = new LoginBox(email);
+		LoginBox frame = new LoginBox(gui);
 		frame.setVisible(true);
 	}
 
@@ -75,86 +72,61 @@ public class LoginBox extends JFrame {
 		JLabel lblNewLabel_1 = new JLabel("Introduza a password");
 		lblNewLabel_1.setFont(new Font("Arial", Font.PLAIN, 11));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-				gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-						.addGap(49)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane
+				.createSequentialGroup().addGap(49)
+				.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(Alignment.TRAILING,
+								gl_contentPane.createSequentialGroup()
 										.addComponent(passwordField, GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
-										.addGap(26)
-										.addComponent(btnLogin)
-										.addGap(38))
-								.addGroup(gl_contentPane.createSequentialGroup()
-										.addComponent(lblNewLabel)
+										.addGap(26).addComponent(btnLogin).addGap(38))
+						.addGroup(gl_contentPane.createSequentialGroup().addComponent(lblNewLabel).addContainerGap())
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_contentPane.createSequentialGroup().addComponent(lblNewLabel_1)
 										.addContainerGap())
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-										.addGroup(gl_contentPane.createSequentialGroup()
-												.addComponent(lblNewLabel_1)
-												.addContainerGap())
-										.addGroup(gl_contentPane.createSequentialGroup()
-												.addComponent(emailLog, GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
-												.addGap(46)))))
-				);
-		gl_contentPane.setVerticalGroup(
-				gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-						.addGap(16)
-						.addComponent(lblNewLabel)
+								.addGroup(gl_contentPane.createSequentialGroup()
+										.addComponent(emailLog, GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
+										.addGap(46))))));
+		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup().addGap(16).addComponent(lblNewLabel)
 						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(emailLog, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addGap(24)
-						.addComponent(lblNewLabel_1)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(btnLogin)
-								.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addContainerGap(28, Short.MAX_VALUE))
-				);
+						.addComponent(emailLog, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE)
+						.addGap(24).addComponent(lblNewLabel_1).addPreferredGap(ComponentPlacement.RELATED)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE).addComponent(btnLogin)
+								.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE))
+						.addContainerGap(28, Short.MAX_VALUE)));
 		contentPane.setLayout(gl_contentPane);
 	}
 
 	private void events() {
 
-
-
 		btnLogin.addActionListener(new ActionListener() {
 
-
 			public void actionPerformed(ActionEvent arg0) {
-				
 				String stringValueOfCharArray = String.valueOf(passwordField.getPassword());
-				
 				setLoginInput(emailLog.getText());
 				setPassInput(stringValueOfCharArray);
-				
-				System.out.println(stringValueOfCharArray);
-				email= new EmailReader(getLoginInput(),getPassInput());
-				email.readEmails(true);
+				gui.readMails(getLoginInput(), getPassInput());
+				dispose();
 			}
-
 		});
-
-
 	}
-	
+
 	public String getLoginInput() {
 		return emailInput;
 	}
-	
+
 	public String getPassInput() {
 		return passwordInput;
 	}
-	
+
 	public void setLoginInput(String input) {
-		this.emailInput=input;
+		this.emailInput = input;
 	}
-	
+
 	public void setPassInput(String input) {
-		this.passwordInput=input;
+		this.passwordInput = input;
 	}
-	public EmailReader getMail() {
-		return email;
-	}
-	
+
 }

@@ -63,7 +63,7 @@ public class EmailReader {
 	 */
 	public void readEmails(boolean isImap) {
 		
-		
+		MensagemDoIscte.clear();
 		// Create all the needed properties - empty!
 		Properties connectionProperties = new Properties();
 		// Create the session
