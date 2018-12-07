@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>CustomUser.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Gui (7/dez/2018 22:06:35)</a> &gt; <a href="../../index.html" class="el_group">Project</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">Facebook</a> &gt; <span class="el_source">CustomUser.java</span></div><h1>CustomUser.java</h1><pre class="source lang-java linenums">package Facebook;
+
+
+import java.util.Date;
+
+import com.restfb.Facebook;
+import com.restfb.types.Post;
+
+
+
+/**
+ * @author Francisco
+ *Class customizavel para utilizadores do Facebook
+ */
+<span class="fc" id="L15">public class CustomUser {</span>
+	
+	@Facebook(&quot;post&quot;)
+	private Post post;
+	
+	@Facebook(&quot;first_name&quot;)
+	private String firstName;
+
+	@Facebook(&quot;last_name&quot;)
+	private String lastName;
+
+	@Facebook(&quot;name&quot;)
+	private String fullName;
+
+	@Facebook(&quot;email&quot;)
+	private String email;
+
+	@Facebook(&quot;birthday&quot;)
+	private Date birthday;
+
+
+	/**
+	 * getFirstName,
+	 * Getter que devolve o primeiro nome do utilizador.
+	 * @return firstName
+	 */
+	public String getFirstName() {
+<span class="fc" id="L42">		return firstName;</span>
+	}
+
+	public void setFirstName(String firstName) {
+<span class="nc" id="L46">		this.firstName = firstName;</span>
+<span class="nc" id="L47">	}</span>
+	/**
+	 * getLastName,
+	 * Getter que devolve o último nome do utilizador.
+	 * @return lastName
+	 */
+	public String getLastName() {
+<span class="fc" id="L54">		return lastName;</span>
+	}
+
+	/**
+	 * setLastName,
+	 * Setter para definir o último nome do utilizador
+	 * @param fullName, é o último nome do utilizador.
+	 */
+	public void setLastName(String lastName) {
+<span class="nc" id="L63">		this.lastName = lastName;</span>
+<span class="nc" id="L64">	}</span>
+	/**
+	 * getFullName,
+	 * Getter que devolve o nome completo do utilizador.
+	 * @return fullName
+	 */
+	public String getFullName() {
+<span class="fc" id="L71">		return fullName;</span>
+	}
+
+	/**
+	 * setFullName,
+	 * Setter para definir o nome completo do utilizador
+	 * @param fullName, é o nome completo do utilizador.
+	 */
+	public void setFullName(String fullName) {
+<span class="nc" id="L80">		this.fullName = fullName;</span>
+<span class="nc" id="L81">	}</span>
+	/**
+	 * getEmail,
+	 * Getter que devolve o e-mail do utilizador.
+	 * @return email
+	 */
+	public String getEmail() {
+<span class="fc" id="L88">		return email;</span>
+	}
+	
+	/**
+	 * setEmail,
+	 * Setter para definir o e-mail do utilizador
+	 * @param email, é o e-mail utilizador.
+	 */
+	public void setEmail(String email) {
+<span class="nc" id="L97">		this.email = email;</span>
+<span class="nc" id="L98">	}</span>
+	
+	/**
+	 * getBirthday,
+	 * Getter que devolve a data de nascimento do utilizador.
+	 * @return birthday
+	 */
+	public Date getBirthday() {
+<span class="nc" id="L106">		return birthday;</span>
+
+	}
+	
+	/**
+	 * setBirthday,
+	 * Setter para definir a data de nascimento do utilizador
+	 * @param birthday, data de nascimento do utilizador.
+	 */
+	public void setBirthday(Date birthday) {
+<span class="nc" id="L116">		this.birthday = birthday;</span>
+<span class="nc" id="L117">	}</span>
+	
+	/**
+	 * getPost,
+	 * Getter que devolve uma publicação.
+	 * @return post
+	 */
+	public Post getPost() {
+		
+<span class="nc" id="L126">		return post;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span>Gui (7/dez/2018 22:06:35)</div></body></html>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>InitTwitterTest.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Gui (7/dez/2018 22:06:35)</a> &gt; <a href="../../index.html" class="el_group">Project</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">jUnitTests</a> &gt; <span class="el_source">InitTwitterTest.java</span></div><h1>InitTwitterTest.java</h1><pre class="source lang-java linenums">
+package jUnitTests;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.io.PrintStream;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+
+import Twitter.TwitterApp;
+import twitter4j.Status;
+import twitter4j.TwitterException;
+
+<span class="nc" id="L15">class InitTwiterTest {</span>
+
+<span class="nc" id="L17">	TwitterApp ta = new TwitterApp();</span>
+
+	@Test
+	void test() {
+<span class="nc" id="L21">		TwitterApp junit = new TwitterApp();</span>
+<span class="nc" id="L22">		assertNotNull(junit);</span>
+
+<span class="nc" id="L24">	}</span>
+	//	PrintStream ConcatenarTokensAcesso( String accessToken, String accessTokenSecret) {
+	//		return System.out.printf( accessToken + accessTokenSecret);
+	//
+	//	}
+
+	@Test
+	void testGetConsumerApiKey() {
+
+<span class="nc" id="L33">		String consumerApiKey=ta.getConsumerApiKey();</span>
+<span class="nc" id="L34">		assertEquals(consumerApiKey, &quot;4rJVbcVIboahTgUlsd7oOFwDd&quot;);</span>
+
+<span class="nc" id="L36">	}</span>
+	@Test
+	void testGetApiSecretKey() {
+
+<span class="nc" id="L40">		String apiSecretKey=ta.getApiSecretKey();</span>
+<span class="nc" id="L41">		assertEquals(apiSecretKey, &quot;wbHgBD2qAJwZpLacQF9wICwnP79UUEvbQ2D1C9SS74KHl79vdW&quot;);</span>
+
+<span class="nc" id="L43">	}</span>
+
+	@Test
+	void testGetAccessToken() {
+
+<span class="nc" id="L48">		String accessToken=ta.getAccessToken();</span>
+<span class="nc" id="L49">		assertEquals(accessToken, &quot;159232832-8BKv6atg6nF2YVsAwUvoj2y4KTXsytriJt9eWCa5&quot;);</span>
+
+<span class="nc" id="L51">	}</span>
+	@Test
+	void testGetAccessTokenSecret() {
+
+<span class="nc" id="L55">		String accessTokenSecret=ta.getAccessTokenSecret();</span>
+<span class="nc" id="L56">		assertEquals(accessTokenSecret, &quot;ndoKlk7Tp5rv7aMVVvtgfNj5FxDNeTnRpQdgWJ0KdBMLb&quot;);</span>
+
+<span class="nc" id="L58">	}</span>
+//	@Test
+//	void testGetTweetId() {  //vai ter que ser alterado consoante a alteração da função get tweet id
+//
+//		long tweetId=ta.getTweetId();
+//		assertEquals(tweetId, 0);
+//
+//	}
+
+	@Test
+	void testGetListaTweets() {
+
+<span class="nc" id="L70">		List&lt;Status&gt;estados= ta.getListaTweets();</span>
+<span class="nc" id="L71">		assertEquals(estados, estados);</span>
+<span class="nc" id="L72">	}</span>
+
+	@Test
+	void testSetFiltro() {
+<span class="nc" id="L76">		System.out.println(&quot;setFiltro&quot;);</span>
+<span class="nc" id="L77">		String filtro = &quot;iscteiul&quot;;</span>
+
+<span class="nc" id="L79">		ta.setFiltro(filtro);</span>
+<span class="nc" id="L80">		assertEquals(ta.getFiltro(), filtro);</span>
+<span class="nc" id="L81">	}</span>
+
+	@Test
+	void testGetFiltro() {
+<span class="nc" id="L85">		System.out.println(&quot;getFiltro&quot;);</span>
+
+<span class="nc" id="L87">		String filtro = &quot;iscteiul&quot;;</span>
+<span class="nc" id="L88">		ta.setFiltro(&quot;iscteiul&quot;);</span>
+<span class="nc" id="L89">		String resultado= ta.getFiltro();</span>
+<span class="nc" id="L90">		assertEquals(filtro, resultado);</span>
+<span class="nc" id="L91">	}</span>
+
+	@Test
+	void testFavoritar() {
+
+<span class="nc" id="L96">	}</span>
+
+	@Test
+	void testRetweetar() {
+
+<span class="nc" id="L101">	}</span>
+
+	@Test
+	void testActualizaTwitter() {
+		
+<span class="nc" id="L106">	}</span>
+
+	@Test //ver melhor isto
+	void testInitTwitter() throws TwitterException {
+<span class="nc" id="L110">		boolean thrown = false;</span>
+		try {
+<span class="nc" id="L112">			ta.initTwitter();</span>
+<span class="nc" id="L113">		} catch (IndexOutOfBoundsException e) {</span>
+<span class="nc" id="L114">			thrown = true;</span>
+		}
+
+<span class="nc" id="L117">		assertTrue(thrown);</span>
+<span class="nc" id="L118">	}</span>
+
+	@Test
+	void testEstadosDoISCTE() {
+<span class="nc" id="L122">		List&lt;Status&gt;estados= ta.getListaTweets();</span>
+<span class="nc" id="L123">		List&lt;Status&gt;estados1=ta.getListaTweets();</span>
+<span class="nc" id="L124">		assertEquals(estados, estados1);</span>
+
+<span class="nc" id="L126">	}</span>
+
+
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span>Gui (7/dez/2018 22:06:35)</div></body></html>

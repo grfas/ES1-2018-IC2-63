@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>InicializadorFacebook.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Gui (7/dez/2018 22:06:35)</a> &gt; <a href="../../index.html" class="el_group">Project</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">Facebook</a> &gt; <span class="el_source">InicializadorFacebook.java</span></div><h1>InicializadorFacebook.java</h1><pre class="source lang-java linenums">package Facebook;
+
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
+import com.restfb.Connection;
+import com.restfb.DefaultFacebookClient;
+import com.restfb.FacebookClient;
+
+import com.restfb.types.Post;
+
+import Email.MessagePrint;
+
+import com.restfb.Parameter;
+import com.restfb.Version;
+
+import Facebook.Constantes;
+import Facebook.CustomUser;
+import xmltry.Offline;
+	/**
+	 * 
+	 * @author Francisco Bruno
+	 *
+	 */
+<span class="fc" id="L25">public class InicializadorFacebook {</span>
+<span class="fc" id="L26">	public List&lt;Post&gt; mensagemDoIscte = new ArrayList&lt;Post&gt;();</span>
+	
+
+	private Connection&lt;Post&gt; myFeed;
+	private FacebookClient facebookClient;
+	/**
+	 * IniciaFace, 
+	 * inicia a conexão com a api do facebook, através do token de acesso
+	 */
+	public void IniciaFace() {
+<span class="fc" id="L36">		facebookClient = new DefaultFacebookClient(Constantes.MY_ACCESS_TOKEN, Version.LATEST);</span>
+
+<span class="fc" id="L38">		CustomUser user = facebookClient.fetchObject(&quot;Me&quot;, CustomUser.class,</span>
+<span class="fc" id="L39">				Parameter.with(&quot;fields&quot;, &quot;id, name, email, first_name, last_name,hometown&quot;));</span>
+
+<span class="fc" id="L41">		System.out.println(&quot;First Name= &quot; + user.getFirstName());</span>
+<span class="fc" id="L42">		System.out.println(&quot;Last Name= &quot; + user.getLastName());</span>
+<span class="fc" id="L43">		System.out.println(&quot;Full Name= &quot; + user.getFullName());</span>
+<span class="fc" id="L44">		System.out.println(&quot;Email= &quot; + user.getEmail());</span>
+		
+<span class="fc" id="L46">		actualizaFace();</span>
+<span class="fc" id="L47">	}</span>
+	
+	/**
+	 * actualizaFace,
+	 * atualiza o facebook
+	 */
+	public void actualizaFace() {
+<span class="fc" id="L54">		myFeed = facebookClient.fetchConnection(&quot;me/feed&quot;, Post.class);</span>
+<span class="fc" id="L55">		System.out.println(&quot;\nPosts:&quot;);</span>
+<span class="fc" id="L56">		int counter5 = 0;</span>
+<span class="fc" id="L57">		int counterTotal = 0;</span>
+<span class="fc bfc" id="L58" title="All 2 branches covered.">		for (List&lt;Post&gt; page : myFeed) {</span>
+<span class="fc bfc" id="L59" title="All 2 branches covered.">			for (Post aPost : page) {</span>
+				// Filters only posts that contain the word &quot;Inform&quot;
+<span class="fc bfc" id="L61" title="All 4 branches covered.">				if (aPost.getMessage() != null &amp;&amp; aPost.getMessage().contains(&quot;Direito&quot;)) {</span>
+<span class="fc" id="L62">					System.out.println(&quot;---- Post &quot; + counter5 + &quot; ----&quot;);</span>
+<span class="fc" id="L63">					System.out.println(&quot;Id: &quot; + &quot;fb.com/&quot; + aPost.getId());</span>
+<span class="fc" id="L64">					System.out.println(&quot;Message: &quot; + aPost.getMessage());</span>
+					//System.out.println(&quot;Created: &quot; + aPost.getCreatedTime());
+<span class="fc" id="L66">					mensagemDoIscte.add(aPost);</span>
+<span class="fc" id="L67">					counter5++;</span>
+				}
+<span class="fc" id="L69">				counterTotal++;</span>
+			}
+		}
+<span class="fc" id="L72">		System.out.println(&quot;-------------\nNº of Results: &quot; + counter5 + &quot;/&quot; + counterTotal);</span>
+<span class="fc" id="L73">			System.out.println(mensagemDoIscte.size());</span>
+			
+			
+
+<span class="fc" id="L77">	}</span>
+	/**
+	 * getMensagemDoIscte,
+	 * Getter que devolve uma Lista de Posts com conteúdo do ISCTE.
+	 * @return MensagemDoIscte 
+	 */
+	public List&lt;Post&gt; getMensagemDoIscte() {
+<span class="fc" id="L84">		return mensagemDoIscte;</span>
+	}
+	
+	/**
+	 * setMensagemDoIscte,
+	 * Setter que define uma Lista de Posts com conteúdo do ISCTE.
+	 * @param mensagemDoIscte 
+	 */
+	public void setMensagemDoIscte(List&lt;Post&gt; mensagemDoIscte) {
+<span class="nc" id="L93">		this.mensagemDoIscte = mensagemDoIscte;</span>
+<span class="nc" id="L94">	}</span>
+
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span>Gui (7/dez/2018 22:06:35)</div></body></html>

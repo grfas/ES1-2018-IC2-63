@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>LoginBox.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Gui (7/dez/2018 22:06:35)</a> &gt; <a href="../../index.html" class="el_group">Project</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">GUI</a> &gt; <span class="el_source">LoginBox.java</span></div><h1>LoginBox.java</h1><pre class="source lang-java linenums">package GUI;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import Email.EmailReader;
+
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JPasswordField;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.AbstractAction;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.Action;
+
+	/**
+	 * 
+	 * @author Gonçalo Ferreira e João Estêvão
+	 * Classe para a caixa de login da GUI
+	 *
+	 */
+public class LoginBox extends JFrame {
+
+	private String passwordInput;
+	private String emailInput;
+	private JPanel contentPane;
+	private JButton btnLogin;
+	private JPasswordField passwordField;
+	private JTextField emailLog;
+	
+	private Gui gui;
+
+<span class="fc" id="L43">	public LoginBox(Gui gui) {</span>
+<span class="fc" id="L44">		this.gui = gui;</span>
+<span class="fc" id="L45">		init();</span>
+<span class="fc" id="L46">		events();</span>
+<span class="fc" id="L47">	}</span>
+
+	/**
+	 * correLogin,
+	 * inicia a aplicação.
+	 */
+	public void correLogin() {
+<span class="fc" id="L54">		LoginBox frame = new LoginBox(gui);</span>
+<span class="fc" id="L55">		frame.setVisible(true);</span>
+<span class="fc" id="L56">	}</span>
+
+	/**
+	 * init,
+	 * cria a moldura.
+	 */
+	public void init() {
+<span class="fc" id="L63">		setTitle(&quot;Login&quot;);</span>
+<span class="fc" id="L64">		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);</span>
+<span class="fc" id="L65">		setBounds(100, 100, 400, 200);</span>
+<span class="fc" id="L66">		contentPane = new JPanel();</span>
+<span class="fc" id="L67">		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));</span>
+<span class="fc" id="L68">		setContentPane(contentPane);</span>
+
+<span class="fc" id="L70">		emailLog = new JTextField();</span>
+<span class="fc" id="L71">		emailLog.setColumns(10);</span>
+
+<span class="fc" id="L73">		btnLogin = new JButton(&quot;Login&quot;);</span>
+<span class="fc" id="L74">		btnLogin.setFont(new Font(&quot;Arial&quot;, Font.BOLD, 11));</span>
+
+<span class="fc" id="L76">		passwordField = new JPasswordField();</span>
+
+<span class="fc" id="L78">		JLabel lblNewLabel = new JLabel(&quot;Introduza o email &quot;);</span>
+<span class="fc" id="L79">		lblNewLabel.setFont(new Font(&quot;Arial&quot;, Font.PLAIN, 11));</span>
+
+<span class="fc" id="L81">		JLabel lblNewLabel_1 = new JLabel(&quot;Introduza a password&quot;);</span>
+<span class="fc" id="L82">		lblNewLabel_1.setFont(new Font(&quot;Arial&quot;, Font.PLAIN, 11));</span>
+<span class="fc" id="L83">		GroupLayout gl_contentPane = new GroupLayout(contentPane);</span>
+<span class="fc" id="L84">		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane</span>
+<span class="fc" id="L85">				.createSequentialGroup().addGap(49)</span>
+<span class="fc" id="L86">				.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)</span>
+<span class="fc" id="L87">						.addGroup(Alignment.TRAILING,</span>
+<span class="fc" id="L88">								gl_contentPane.createSequentialGroup()</span>
+<span class="fc" id="L89">										.addComponent(passwordField, GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)</span>
+<span class="fc" id="L90">										.addGap(26).addComponent(btnLogin).addGap(38))</span>
+<span class="fc" id="L91">						.addGroup(gl_contentPane.createSequentialGroup().addComponent(lblNewLabel).addContainerGap())</span>
+<span class="fc" id="L92">						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)</span>
+<span class="fc" id="L93">								.addGroup(gl_contentPane.createSequentialGroup().addComponent(lblNewLabel_1)</span>
+<span class="fc" id="L94">										.addContainerGap())</span>
+<span class="fc" id="L95">								.addGroup(gl_contentPane.createSequentialGroup()</span>
+<span class="fc" id="L96">										.addComponent(emailLog, GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)</span>
+<span class="fc" id="L97">										.addGap(46))))));</span>
+<span class="fc" id="L98">		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)</span>
+<span class="fc" id="L99">				.addGroup(gl_contentPane.createSequentialGroup().addGap(16).addComponent(lblNewLabel)</span>
+<span class="fc" id="L100">						.addPreferredGap(ComponentPlacement.RELATED)</span>
+<span class="fc" id="L101">						.addComponent(emailLog, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,</span>
+<span class="fc" id="L102">								GroupLayout.PREFERRED_SIZE)</span>
+<span class="fc" id="L103">						.addGap(24).addComponent(lblNewLabel_1).addPreferredGap(ComponentPlacement.RELATED)</span>
+<span class="fc" id="L104">						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE).addComponent(btnLogin)</span>
+<span class="fc" id="L105">								.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,</span>
+<span class="fc" id="L106">										GroupLayout.PREFERRED_SIZE))</span>
+<span class="fc" id="L107">						.addContainerGap(28, Short.MAX_VALUE)));</span>
+<span class="fc" id="L108">		contentPane.setLayout(gl_contentPane);</span>
+<span class="fc" id="L109">	}</span>
+
+	/**
+	 * events,
+	 * procedimento que associa os eventos da aplicação a cada acção 
+	 */
+	private void events() {
+
+<span class="fc" id="L117">		btnLogin.addActionListener(new ActionListener() {</span>
+
+			public void actionPerformed(ActionEvent arg0) {
+<span class="fc" id="L120">				String stringValueOfCharArray = String.valueOf(passwordField.getPassword());</span>
+<span class="fc" id="L121">				setLoginInput(emailLog.getText());</span>
+<span class="fc" id="L122">				setLoginInput();</span>
+				
+<span class="fc" id="L124">				setPassInput(stringValueOfCharArray);</span>
+				
+<span class="fc" id="L126">				setPassInput();</span>
+<span class="fc" id="L127">				gui.readMails(getLoginInput(), getPassInput());</span>
+<span class="fc" id="L128">				dispose();</span>
+<span class="fc" id="L129">			}</span>
+		});
+<span class="fc" id="L131">	}</span>
+
+	/**
+	 * getLoginInput
+	 * Getter que devolve o e-mail de login
+	 *@return emailInput
+	 */
+	public String getLoginInput() {
+<span class="fc" id="L139">		return emailInput;</span>
+	}
+	/**
+	 * setLoginInput,
+	 * Setter para o LoginInput
+	 * @param emailInput, e-mail com o qual pretendemos iniciar sessão.
+	 */
+	public void setLoginInput() {
+<span class="fc" id="L147">		gui.setLogUser(getLoginInput());</span>
+<span class="fc" id="L148">	}</span>
+	
+	/**
+	 * setPassInput,
+	 * Setter para o PassInput
+	 * @param passwordInput, palavra-passe com a qual pretendemos iniciar sessão.
+	 */
+	public void setPassInput() {
+<span class="fc" id="L156">		gui.setLogPass(getPassInput());</span>
+<span class="fc" id="L157">	}</span>
+
+	/**
+	 * getLoginInput
+	 * Getter que devolve o passeInput
+	 *@return passwordInput, palavra-passe que usamos 
+	 */
+	public String getPassInput() {
+<span class="fc" id="L165">		return passwordInput;</span>
+	}
+
+	/**
+	 * setLoginInput,
+	 * Setter para o LoginInput
+	 * @param emailInput, e-mail com o qual pretendemos iniciar sessão.
+	 */
+	public void setLoginInput(String input) {
+<span class="fc" id="L174">		this.emailInput = input;</span>
+<span class="fc" id="L175">	}</span>
+	/**
+	 * setPassInput,
+	 * Setter para o PassInput
+	 * @param passwordInput, palavra-passe com a qual pretendemos iniciar sessão.
+	 */
+	public void setPassInput(String input) {
+<span class="fc" id="L182">		this.passwordInput = input;</span>
+<span class="fc" id="L183">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span>Gui (7/dez/2018 22:06:35)</div></body></html>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>Offline.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Gui (7/dez/2018 22:06:35)</a> &gt; <a href="../../index.html" class="el_group">Project</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">xmltry</a> &gt; <span class="el_source">Offline.java</span></div><h1>Offline.java</h1><pre class="source lang-java linenums">package xmltry;
+import java.io.StringReader;
+import java.io.StringWriter;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.Document;
+import org.xml.sax.InputSource;
+
+<span class="nc" id="L17">public class Offline {</span>
+	public static void main(String[] args) {
+<span class="nc" id="L19">        final String xmlStr = &quot;&lt;?xml version=\&quot;1.0\&quot; encoding=\&quot;UTF-8\&quot; standalone=\&quot;yes\&quot;?&gt;\n&quot;+</span>
+                                &quot;&lt;Emp id=\&quot;1\&quot;&gt;&lt;name&gt;Pankaj&lt;/name&gt;&lt;age&gt;25&lt;/age&gt;\n&quot;+
+                                &quot;&lt;role&gt;Developer&lt;/role&gt;&lt;gen&gt;Male&lt;/gen&gt;&lt;/Emp&gt;&quot;;
+<span class="nc" id="L22">        Document doc = convertStringToDocument(xmlStr);</span>
+        
+<span class="nc" id="L24">        String str = convertDocumentToString(doc);</span>
+<span class="nc" id="L25">        System.out.println(str);</span>
+<span class="nc" id="L26">    }</span>
+public static String convertDocumentToString(Document doc) {
+<span class="nc" id="L28">        TransformerFactory tf = TransformerFactory.newInstance();</span>
+        Transformer transformer;
+        try {
+<span class="nc" id="L31">            transformer = tf.newTransformer();</span>
+            // below code to remove XML declaration
+            // transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, &quot;yes&quot;);
+<span class="nc" id="L34">            StringWriter writer = new StringWriter();</span>
+<span class="nc" id="L35">            transformer.transform(new DOMSource(doc), new StreamResult(writer));</span>
+<span class="nc" id="L36">            String output = writer.getBuffer().toString();</span>
+<span class="nc" id="L37">            return output;</span>
+<span class="nc" id="L38">        } catch (TransformerException e) {</span>
+<span class="nc" id="L39">            e.printStackTrace();</span>
+        }
+        
+<span class="nc" id="L42">        return null;</span>
+    }
+
+    public static Document convertStringToDocument(String xmlStr) {
+<span class="nc" id="L46">        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();  </span>
+        DocumentBuilder builder;  
+        try  
+        {  
+<span class="nc" id="L50">            builder = factory.newDocumentBuilder();  </span>
+<span class="nc" id="L51">            Document doc = builder.parse( new InputSource( new StringReader( xmlStr ) ) ); </span>
+<span class="nc" id="L52">            return doc;</span>
+<span class="nc" id="L53">        } catch (Exception e) {  </span>
+<span class="nc" id="L54">            e.printStackTrace();  </span>
+        } 
+<span class="nc" id="L56">        return null;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span>Gui (7/dez/2018 22:06:35)</div></body></html>

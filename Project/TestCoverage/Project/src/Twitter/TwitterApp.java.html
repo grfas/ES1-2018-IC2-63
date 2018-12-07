@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>TwitterApp.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Gui (7/dez/2018 22:06:35)</a> &gt; <a href="../../index.html" class="el_group">Project</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">Twitter</a> &gt; <span class="el_source">TwitterApp.java</span></div><h1>TwitterApp.java</h1><pre class="source lang-java linenums">package Twitter;
+
+	import java.util.List;
+	import twitter4j.*;
+	import twitter4j.auth.AccessToken;
+	import twitter4j.conf.ConfigurationBuilder;
+	/**
+	 * @author Gonçalo Canha
+	 * Classe do twitter
+	 *
+	 */
+
+<span class="fc" id="L13">	public class TwitterApp {</span>
+	
+	private List&lt;Status&gt; estadosDoIscte;
+
+	private TwitterFactory tf;
+	private twitter4j.Twitter twitter;
+<span class="fc" id="L19">	private String filtro = &quot;iscteiul&quot;;</span>
+
+	
+<span class="fc" id="L22">	public String consumerApiKey=&quot;WlykUrj8IWMlPgMHpffoTO5ZD&quot;;</span>
+<span class="fc" id="L23">	public String apiSecretKey=&quot;EnvICCHNRqmOZEjVS5th7haBhvbjoCrVPwNHMpPjcz3uQklWle&quot;;</span>
+<span class="fc" id="L24">	public String accessToken=&quot;159232832-19nUFvi655cA9TDS7r2zDEbjTnpnhXnTf1sdC5Xk&quot;;</span>
+<span class="fc" id="L25">	public String accessTokenSecret=&quot;e0OW9UdG62C6OzEHBNTAeVFf4yF8a6mwsI47h5HyQmo7J&quot;;</span>
+	
+	/**
+	 * getListaTweets,
+	 * Getter para uma lista de tweets com estados do iscte.
+	 * @return estadosDoIscte, uma lista de tweets relativos ao iscteiul
+	 */
+	public List&lt;Status&gt; getListaTweets(){
+<span class="fc" id="L33">		return estadosDoIscte;</span>
+	}
+
+
+
+	/**
+	 *initTwitter,
+	 * inicia a conexão com a api do twitter
+	 * @throws TwitterException
+	 */
+	public void initTwitter() throws TwitterException{
+<span class="fc" id="L44">		ConfigurationBuilder cb = new ConfigurationBuilder();</span>
+
+<span class="fc" id="L46">		cb.setDebugEnabled(true)</span>
+<span class="fc" id="L47">		.setOAuthConsumerKey(consumerApiKey)</span>
+<span class="fc" id="L48">		.setOAuthConsumerSecret( apiSecretKey)</span>
+<span class="fc" id="L49">		.setOAuthAccessToken(accessToken)</span>
+<span class="fc" id="L50">		.setOAuthAccessTokenSecret(accessTokenSecret);</span>
+<span class="fc" id="L51">		tf = new TwitterFactory(cb.build());</span>
+<span class="fc" id="L52">		twitter = tf.getInstance();</span>
+		
+		//É preciso criar os botões na gui e colocar os handlers aqui para retweetar
+
+
+		//------------------------------------------
+
+//		twitter.getHomeTimeline();
+//
+//		List&lt;Status&gt; estadosDaTimeLine = twitter.getHomeTimeline();
+//		for(Status st : estadosDaTimeLine)
+//		{
+//			System.out.println(st.getUser().getName()+&quot; -- &quot;+st.getText());
+
+<span class="fc" id="L66">			estadosDoIscte = twitter.getUserTimeline(filtro);</span>
+//			for(Status si: estadosDoIscte){
+//				//				System.out.println(si.getUser().getName()+&quot; -- &quot;+si.getText());
+//			}
+//
+//		}
+		//Coloco o handler do botão retweetar e chamo a função retweetar dentro do handler mas antes tenho que ver com o tweet selecionado na lista
+
+<span class="fc" id="L74">	}</span>
+	
+	 /**
+	 * actualizaTwitter,
+	 * Actualiza a lista de tweets com estados relativos a um filtro
+	 * @throws TwitterException
+	 *
+	 */
+	public void actualizaTwitter() throws TwitterException {
+		
+<span class="fc" id="L84">		estadosDoIscte = twitter.getUserTimeline(filtro);</span>
+<span class="fc" id="L85">	}</span>
+
+
+	/**
+	 * reweetar, 
+	 * permite retweetar(repostar) um tweet
+	 * @param estado, este estado é o tweet que pretendemos retweetar 
+	 * @throws TwitterException 
+	 */
+	public void retweetar(Status estado) throws TwitterException {
+<span class="nc" id="L95">		long id =estado.getId();</span>
+<span class="nc" id="L96">		twitter.retweetStatus((id));</span>
+<span class="nc" id="L97">	}</span>
+	
+
+	/**Funções que vão ser primariamente usadas para fazer os testes
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; branch 'Development' of https://github.com/grfas/ES1-2018-IC2-63.git
+
+
+	/**
+	 * getConsumerApiKey,
+	 * Getter que devolve a chave do Consumidor da API (consumerApiKey).
+	 * @return consumerApiKey
+	 */
+	public String getConsumerApiKey() {
+<span class="nc" id="L110">		return consumerApiKey;</span>
+	}
+	
+	/**
+	 * getApiSecretKey, 
+	 * Getter que devolve a chave secreta do Consumidor da API (apiSecretKey).
+	 * @return apiSecretKey
+	 */
+	public String getApiSecretKey() {
+<span class="nc" id="L119">		return apiSecretKey;</span>
+	}
+	
+	/**
+	 * getAccessToken,
+	 * Getter que devolve a chave de Acesso (accessToken).
+	 * @return getAcessToken
+	 */
+	public String getAccessToken() {
+<span class="nc" id="L128">		return accessToken;</span>
+	}
+	
+	/**
+	 * getAcessTokenSecret,
+	 * Getter que devolve a chave secreta de acesso (accessTokenSecret).
+	 * @return accessTokenSecret
+	 */
+	public String getAccessTokenSecret() {
+<span class="nc" id="L137">		return accessTokenSecret;</span>
+	}
+
+
+
+	/**
+	 * setFiltro,
+	 * Setter para o filtro (filter).
+	 * @param filtro, é o filtro que vamos aplicar aquando da exibição dos tweets.
+	 */
+	public void setFiltro(String filtro) {
+<span class="fc" id="L148">		this.filtro=filtro;</span>
+<span class="fc" id="L149">	}</span>
+
+	/**
+	 * getFiltro,
+	 * Getter que devolve o filtro (filter).
+	 * @return filtro
+	 */
+	public String getFiltro() {
+<span class="fc" id="L157">		return this.filtro;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span>Gui (7/dez/2018 22:06:35)</div></body></html>

@@ -1,0 +1,553 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>Gui.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Gui (7/dez/2018 22:06:35)</a> &gt; <a href="../../index.html" class="el_group">Project</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">GUI</a> &gt; <span class="el_source">Gui.java</span></div><h1>Gui.java</h1><pre class="source lang-java linenums">package GUI;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+import com.restfb.Facebook;
+import com.restfb.types.Post;
+
+import Email.EmailReader;
+import Email.MessagePrint;
+import Facebook.InicializadorFacebook;
+import Twitter.TwitterApp;
+import twitter4j.Status;
+import twitter4j.TwitterException;
+import xmltry.Offline;
+
+import javax.swing.DefaultListModel;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
+import javax.swing.JTabbedPane;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.LinkedList;
+import java.util.List;
+import java.awt.event.ActionEvent;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.FlowLayout;
+import javax.swing.JDesktopPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+/**
+ * @author João Estêvão
+ * Classe construtora e inicializadora da Gui
+ */
+
+public class Gui extends JFrame {
+<span class="fc" id="L50">	private DefaultListModel&lt;String&gt; model = new DefaultListModel&lt;&gt;();</span>
+<span class="fc" id="L51">	private DefaultListModel&lt;String&gt; modelEmail = new DefaultListModel&lt;&gt;();</span>
+<span class="fc" id="L52">	private DefaultListModel&lt;String&gt; modelFacebook = new DefaultListModel&lt;&gt;();</span>
+	private JPanel contentPane1;
+	private JButton btnActualizarT;
+	private static TwitterApp twitter;
+<span class="fc" id="L56">	JList&lt;String&gt; listaTweets = new JList&lt;&gt;(model);</span>
+<span class="fc" id="L57">	JList&lt;String&gt; listaEmails = new JList&lt;&gt;(modelEmail);</span>
+<span class="fc" id="L58">	JList&lt;String&gt; listaFacebookposts = new JList&lt;&gt;(modelFacebook);</span>
+	String selecao;
+	private List&lt;Status&gt; listaEstados;
+	private static List&lt;String&gt; listaPosts;
+<span class="fc" id="L62">	JTextArea areaTweet = new JTextArea();</span>
+<span class="fc" id="L63">	JTextArea areaEmail = new JTextArea();</span>
+<span class="fc" id="L64">	JTextArea areaFacebook = new JTextArea();</span>
+	private JButton btnActualizarF;
+	private JButton btnActualizarE;
+	private JButton btnAlterarFiltroE;
+	private JButton btnAlterarFiltroT;
+	private JButton btnEscreverEmail;
+	private JButton btnReencaminharMail;
+	private JTextField textFieldF;
+	private JTextField textFieldE;
+	private JTextField txtFiltroT;
+	private static EmailReader email;
+	private static InicializadorFacebook facebook;
+	private static LoginBox passBox;
+	private String emailLog;
+	private String emailPass;
+	private String corpoMensagem;
+	private static Offline off;
+	
+	
+	
+	
+	/**
+	 * main,
+	 * o método main é onde a gui é criada
+	 * @param args
+	 * @throws TwitterException
+	 */
+	
+	public static void main(String[] args) {
+
+<span class="fc" id="L94">		System.out.println(&quot;oioi&quot;);</span>
+<span class="fc" id="L95">		System.out.println(&quot;11:18 - 4/12/2018&quot;);</span>
+
+<span class="fc" id="L97">		EventQueue.invokeLater(new Runnable() {</span>
+			public void run() {
+				try {
+
+<span class="fc" id="L101">					Gui frame = new Gui();</span>
+<span class="fc" id="L102">					frame.setVisible(true);</span>
+					// frame.relistTweets();
+<span class="pc" id="L104">				} catch (Exception e) {</span>
+<span class="nc" id="L105">					e.printStackTrace();</span>
+				}
+<span class="fc" id="L107">			}</span>
+		});
+
+<span class="fc" id="L110">		twitter = new TwitterApp();</span>
+//		String name = JOptionPane.showInputDialog(&quot;Introduza o user do email&quot;);
+//		JPasswordField pwd = new JPasswordField(10);
+//		int action = JOptionPane.showConfirmDialog(null, pwd,&quot;Enter Password&quot;,JOptionPane.OK_OPTION);
+//		if(action &lt; 0)JOptionPane.showMessageDialog(null,&quot;Cancel, X or escape key selected&quot;);
+
+<span class="fc" id="L116">		facebook = new InicializadorFacebook();</span>
+		
+		try {
+
+<span class="fc" id="L120">			twitter.initTwitter();</span>
+			
+<span class="fc" id="L122">			facebook.IniciaFace();</span>
+			//offlineRead();
+
+<span class="pc" id="L125">		} catch (TwitterException e1) {</span>
+			// TODO Auto-generated catch block
+<span class="nc" id="L127">			e1.printStackTrace();</span>
+		}
+		
+		
+<span class="fc" id="L131">	}</span>
+	
+	/**
+	 *offlineRead,
+	 *permite a leitura/visualização de posts e e-mails, offline.
+	 */
+	public static void offlineRead() {
+<span class="nc" id="L138">		System.out.println(&quot;olá&quot;+listaPosts.size());</span>
+<span class="nc bnc" id="L139" title="All 2 branches missed.">		for(String f :listaPosts)</span>
+<span class="nc" id="L140">			Offline.convertStringToDocument(f);</span>
+<span class="nc" id="L141">	}</span>
+	public void readMails(String input, String PassInput) {
+<span class="fc" id="L143">		email = new EmailReader(input, PassInput);</span>
+<span class="fc" id="L144">		email.readEmails(true);</span>
+<span class="fc" id="L145">	}</span>
+
+	/**
+	 * Gui
+	 * Cria a moldura.
+	 */
+<span class="fc" id="L151">	public Gui() {</span>
+<span class="fc" id="L152">		init();</span>
+<span class="fc" id="L153">		passBox = new LoginBox(this);</span>
+<span class="fc" id="L154">		passBox.correLogin();</span>
+<span class="fc" id="L155">		events();</span>
+
+<span class="fc" id="L157">	}</span>
+
+	/**
+	 * relisTweets,
+	 * permite atualizar a lista de status/tweets
+	 * 
+	 */
+	private void relistTweets() {
+
+<span class="nc bnc" id="L166" title="All 2 branches missed.">		for (Status s : twitter.getListaTweets()) {</span>
+<span class="nc" id="L167">			model.addElement(s.getUser().getName() + &quot; - &quot; + s.getCreatedAt());</span>
+<span class="nc" id="L168">			System.out.println(s.getUser().getName() + &quot; - &quot; + s.getCreatedAt());</span>
+		}
+<span class="nc" id="L170">	}</span>
+	
+	/**
+	 * setLogUser,
+	 * Setter para o log
+	 * @param  log, e-mail com o qual pretendemos iniciar sessão na gui.
+	 */
+	public void setLogUser(String log) {
+<span class="fc" id="L178">		emailLog=log;</span>
+<span class="fc" id="L179">	}</span>
+	/**
+	 * getLogUser
+	 * Getter que devolve o log
+	 *@return e-mailLog, e-mail com o qual pretendemos iniciar sessão na gui. 
+	 */
+	public String getLogUser() {
+<span class="nc" id="L186">		return emailLog;</span>
+	}
+	
+	/**
+	 * setLogPass,
+	 * Setter para o Pass
+	 * @param Pass, palavra-passe com a qual pretendemos iniciar sessão.
+	 */
+
+	public void setLogPass(String Pass) {
+<span class="fc" id="L196">		emailPass=Pass;</span>
+<span class="fc" id="L197">	}</span>
+
+	/**
+	 * getLogPass
+	 * Getter que devolve a emailPass
+	 *@return passwordInput, palavra-passe que usamos associada ao e-mail
+	 */
+	public String getLogPass() {
+<span class="nc" id="L205">		return emailPass;</span>
+	}
+	/**
+	 * relistaEmails,
+	 * atualização da lista de e-mails
+	 */
+	private void relistaEmails() {
+
+<span class="nc bnc" id="L213" title="All 2 branches missed.">		for (MessagePrint s : email.getMensagemDoIscte()) {</span>
+<span class="nc" id="L214">			model.addElement(s.getFrom() + &quot; - &quot; + s.getTitulo());</span>
+<span class="nc" id="L215">			System.out.println(s.getFrom() + &quot; - &quot; + s.getTitulo());</span>
+		}
+
+<span class="nc" id="L218">	}</span>
+	/**
+	 * relistaFacebookPosts,
+	 * atualização da lista de posts do facebook
+	 */
+	private void relistaFacebookPosts() {
+<span class="nc bnc" id="L224" title="All 2 branches missed.">		for (Post p : facebook.getMensagemDoIscte()) {</span>
+<span class="nc" id="L225">			modelFacebook.addElement((p.getFrom()) + &quot; - &quot; + p.getCaption());</span>
+<span class="nc" id="L226">			System.out.println(p.getFrom() + &quot; - &quot; + p.getCaption());</span>
+		}
+<span class="nc" id="L228">	}</span>
+
+	/**
+	 * events,
+	 * procedimento que associa os eventos da aplicação a cada acção 
+	 */
+	private void events() {
+
+<span class="fc" id="L236">		btnActualizarF.addActionListener(new ActionListener() {</span>
+
+			public void actionPerformed(ActionEvent arg0) {
+<span class="fc" id="L239">				listaFacebookposts.removeAll();</span>
+<span class="fc" id="L240">				facebook.actualizaFace();</span>
+<span class="fc bfc" id="L241" title="All 2 branches covered.">				for (Post p : facebook.getMensagemDoIscte()) {</span>
+<span class="fc" id="L242">					modelFacebook.addElement(p.getId() + &quot; - &quot; + p.getMessage());</span>
+
+//					modelFacebook.addElement(p.getFrom().getName()+ &quot; - &quot;+p.getCaption());
+				}
+
+<span class="fc" id="L247">				areaFacebook.setText(null);</span>
+
+<span class="fc" id="L249">			}</span>
+
+		});
+
+<span class="fc" id="L253">		btnActualizarT.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent arg0) {
+<span class="fc" id="L255">				listaTweets.removeAll();</span>
+				try {
+<span class="fc" id="L257">					twitter.actualizaTwitter();</span>
+<span class="pc" id="L258">				} catch (TwitterException e) {</span>
+					// TODO Auto-generated catch block
+<span class="nc" id="L260">					e.printStackTrace();</span>
+				}
+<span class="fc bfc" id="L262" title="All 2 branches covered.">				for (Status s : twitter.getListaTweets()) {</span>
+<span class="fc" id="L263">					model.addElement(s.getUser().getName() + &quot; - &quot; + s.getCreatedAt());</span>
+
+				}
+
+//				listaTweets = new JList&lt;&gt;(model);
+
+<span class="fc" id="L269">				System.out.println(&quot;button clicked!&quot;);</span>
+
+<span class="fc" id="L271">				areaTweet.setText(null);</span>
+				// relistTweets();
+
+<span class="fc" id="L274">			}</span>
+		});
+
+<span class="fc" id="L277">		btnActualizarE.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent arg0) {
+<span class="fc" id="L279">				modelEmail.clear();</span>
+<span class="fc" id="L280">				System.out.println(&quot;lista email&quot; + email.getMensagemDoIscte());</span>
+<span class="fc bfc" id="L281" title="All 2 branches covered.">				for (MessagePrint s : email.getMensagemDoIscte()) {</span>
+<span class="fc" id="L282">					modelEmail.addElement(s.getFrom() + &quot; - &quot; + s.getTitulo());</span>
+				}
+
+<span class="fc" id="L285">				System.out.println(&quot;button email clicked!&quot;);</span>
+
+<span class="fc" id="L287">				areaEmail.setText(null);</span>
+				// relistTweets();
+
+<span class="fc" id="L290">			}</span>
+		});
+<span class="fc" id="L292">		btnAlterarFiltroE.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent arg0) {
+<span class="fc" id="L294">				email.setFiltroEmail(textFieldE.getText());</span>
+<span class="fc" id="L295">				email.readEmails(true);</span>
+<span class="fc" id="L296">				System.out.println(&quot;filtro&quot; + email.getFiltroEmail());</span>
+
+<span class="fc" id="L298">				System.out.println(&quot;button filtro email clicked!&quot;);</span>
+
+<span class="fc" id="L300">			}</span>
+		});
+
+<span class="fc" id="L303">		btnAlterarFiltroT.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent arg0) {
+<span class="fc" id="L305">				twitter.setFiltro(txtFiltroT.getText());</span>
+
+<span class="fc" id="L307">				System.out.println(&quot;filtro&quot; + twitter.getFiltro());</span>
+
+<span class="fc" id="L309">				System.out.println(&quot;button filtro twitter clicked!&quot;);</span>
+
+<span class="fc" id="L311">			}</span>
+		});
+
+<span class="fc" id="L314">		btnEscreverEmail.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent arg0) {
+<span class="nc" id="L316">				System.out.println(&quot;emailpass gui&quot;+emailPass);</span>
+<span class="nc" id="L317">				EmailWrite escritaEmail = new EmailWrite(emailLog,emailPass,&quot;&quot;);</span>
+
+<span class="nc" id="L319">				escritaEmail.setVisible(true);</span>
+
+<span class="nc" id="L321">			}</span>
+		});
+
+<span class="fc" id="L324">		btnReencaminharMail.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent arg0) {
+<span class="fc" id="L326">				EmailWrite escritaEmail = new EmailWrite(emailLog,emailPass,corpoMensagem);</span>
+<span class="fc" id="L327">				escritaEmail.setVisible(true);</span>
+<span class="fc" id="L328">			}</span>
+		});
+
+<span class="fc" id="L331">		listaFacebookposts.addListSelectionListener(new ListSelectionListener() {</span>
+
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+<span class="fc" id="L335">				areaFacebook.setText(null);</span>
+<span class="fc" id="L336">				String selectedValue = (String) listaFacebookposts.getSelectedValue();</span>
+<span class="fc" id="L337">				System.out.println(&quot;lolo&quot; + listaFacebookposts.getSelectedValue());</span>
+<span class="fc bfc" id="L338" title="All 2 branches covered.">				for (Post p : facebook.getMensagemDoIscte()) {</span>
+<span class="fc bfc" id="L339" title="All 2 branches covered.">					if (selectedValue.equals(p.getId() + &quot; - &quot; + p.getMessage())) {</span>
+
+<span class="fc" id="L341">						areaFacebook.setText(p.getMessage());</span>
+					}
+				}
+
+<span class="fc" id="L345">			}</span>
+		});
+
+<span class="fc" id="L348">		listaTweets.addListSelectionListener(new ListSelectionListener() {</span>
+
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+<span class="fc" id="L352">				areaTweet.setText(null);</span>
+<span class="fc" id="L353">				String selectedValue = (String) listaTweets.getSelectedValue();</span>
+<span class="fc" id="L354">				System.out.println(&quot;l &quot; + listaTweets.getSelectedValue());</span>
+<span class="fc bfc" id="L355" title="All 2 branches covered.">				for (Status s : twitter.getListaTweets()) {</span>
+<span class="fc bfc" id="L356" title="All 2 branches covered.">					if (selectedValue.equals(s.getUser().getName() + &quot; - &quot; + s.getCreatedAt())) {</span>
+
+<span class="fc" id="L358">						areaTweet.setText(s.getText());</span>
+					}
+				}
+
+<span class="fc" id="L362">			}</span>
+		});
+
+<span class="fc" id="L365">		listaEmails.addListSelectionListener(new ListSelectionListener() {</span>
+
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+<span class="fc" id="L369">				areaEmail.setText(null);</span>
+<span class="fc" id="L370">				String selectedValue = (String) listaEmails.getSelectedValue();</span>
+<span class="fc bfc" id="L371" title="All 2 branches covered.">				for (MessagePrint mp : email.getMensagemDoIscte()) {</span>
+<span class="fc bfc" id="L372" title="All 2 branches covered.">					if (selectedValue.equals(mp.getFrom() + &quot; - &quot; + mp.getTitulo())) {</span>
+<span class="fc" id="L373">						areaEmail.setText(mp.getTexto());</span>
+<span class="fc" id="L374">						corpoMensagem=mp.getTexto();</span>
+					}
+				}
+<span class="fc" id="L377">			}</span>
+		});
+<span class="fc" id="L379">	}</span>
+    /**
+     *actualizarTweets,
+     *procedimento que actualiza lista de Tweets 
+    */
+	private void actualizarTweets() {
+<span class="nc" id="L385">		this.listaEstados.clear();</span>
+<span class="nc" id="L386">		this.listaEstados = twitter.getListaTweets();</span>
+<span class="nc" id="L387">	}</span>
+	
+	/**
+	 * init,
+	 * procedimento para a construção e inicialização da janela
+	 */
+	private void init() {
+<span class="fc" id="L394">		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
+<span class="fc" id="L395">		setBounds(100, 100, 516, 390);</span>
+<span class="fc" id="L396">		contentPane1 = new JPanel();</span>
+<span class="fc" id="L397">		contentPane1.setBorder(new EmptyBorder(5, 5, 5, 5));</span>
+<span class="fc" id="L398">		setContentPane(contentPane1);</span>
+
+<span class="fc" id="L400">		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);</span>
+<span class="fc" id="L401">		GroupLayout gl_contentPane1 = new GroupLayout(contentPane1);</span>
+<span class="fc" id="L402">		gl_contentPane1.setHorizontalGroup(</span>
+<span class="fc" id="L403">				gl_contentPane1.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane1.createSequentialGroup()</span>
+<span class="fc" id="L404">						.addGap(1).addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)));</span>
+<span class="fc" id="L405">		gl_contentPane1.setVerticalGroup(</span>
+<span class="fc" id="L406">				gl_contentPane1.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane1.createSequentialGroup()</span>
+<span class="fc" id="L407">						.addGap(5).addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE)));</span>
+
+<span class="fc" id="L409">		JPanel panelEmail = new JPanel();</span>
+<span class="fc" id="L410">		tabbedPane.addTab(&quot;Email&quot;, null, panelEmail, null);</span>
+
+<span class="fc" id="L412">		JScrollPane scrollPane = new JScrollPane();</span>
+
+<span class="fc" id="L414">		JScrollPane scrollPaneE = new JScrollPane();</span>
+
+<span class="fc" id="L416">		btnActualizarE = new JButton(&quot;Actualizar&quot;);</span>
+
+<span class="fc" id="L418">		textFieldE = new JTextField();</span>
+<span class="fc" id="L419">		textFieldE.setColumns(10);</span>
+
+<span class="fc" id="L421">		btnAlterarFiltroE = new JButton(&quot;Alterar Filtro&quot;);</span>
+
+<span class="fc" id="L423">		btnEscreverEmail = new JButton(&quot;Enviar email&quot;);</span>
+
+<span class="fc" id="L425">		btnReencaminharMail = new JButton(&quot;Reencaminhar&quot;);</span>
+<span class="fc" id="L426">		GroupLayout gl_panelEmail = new GroupLayout(panelEmail);</span>
+<span class="fc" id="L427">		gl_panelEmail.setHorizontalGroup(gl_panelEmail.createParallelGroup(Alignment.LEADING)</span>
+<span class="fc" id="L428">				.addGroup(gl_panelEmail.createSequentialGroup().addGap(1)</span>
+<span class="fc" id="L429">						.addComponent(scrollPaneE, GroupLayout.PREFERRED_SIZE, 181, GroupLayout.PREFERRED_SIZE)</span>
+<span class="fc" id="L430">						.addGap(1).addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 166, GroupLayout.PREFERRED_SIZE)</span>
+<span class="fc" id="L431">						.addPreferredGap(ComponentPlacement.RELATED)</span>
+<span class="fc" id="L432">						.addGroup(gl_panelEmail.createParallelGroup(Alignment.LEADING, false)</span>
+<span class="fc" id="L433">								.addComponent(btnAlterarFiltroE, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,</span>
+<span class="fc" id="L434">										Short.MAX_VALUE)</span>
+<span class="fc" id="L435">								.addComponent(btnReencaminharMail, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,</span>
+<span class="fc" id="L436">										Short.MAX_VALUE)</span>
+<span class="fc" id="L437">								.addComponent(btnEscreverEmail, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,</span>
+<span class="fc" id="L438">										Short.MAX_VALUE)</span>
+<span class="fc" id="L439">								.addComponent(btnActualizarE, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,</span>
+<span class="fc" id="L440">										Short.MAX_VALUE)</span>
+<span class="fc" id="L441">								.addComponent(textFieldE))</span>
+<span class="fc" id="L442">						.addContainerGap(28, Short.MAX_VALUE)));</span>
+<span class="fc" id="L443">		gl_panelEmail.setVerticalGroup(gl_panelEmail.createParallelGroup(Alignment.LEADING)</span>
+<span class="fc" id="L444">				.addComponent(scrollPaneE, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)</span>
+<span class="fc" id="L445">				.addComponent(scrollPane, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE).addGroup(</span>
+<span class="fc" id="L446">						gl_panelEmail.createSequentialGroup().addContainerGap().addComponent(btnActualizarE).addGap(28)</span>
+<span class="fc" id="L447">								.addComponent(textFieldE, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,</span>
+<span class="fc" id="L448">										GroupLayout.PREFERRED_SIZE)</span>
+<span class="fc" id="L449">								.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnAlterarFiltroE).addGap(45)</span>
+<span class="fc" id="L450">								.addComponent(btnEscreverEmail).addGap(18).addComponent(btnReencaminharMail)</span>
+<span class="fc" id="L451">								.addContainerGap(88, Short.MAX_VALUE)));</span>
+
+<span class="fc" id="L453">		scrollPaneE.setRowHeaderView(listaEmails);</span>
+
+<span class="fc" id="L455">		scrollPane.setViewportView(areaEmail);</span>
+<span class="fc" id="L456">		panelEmail.setLayout(gl_panelEmail);</span>
+
+<span class="fc" id="L458">		JPanel panelFacebook = new JPanel();</span>
+<span class="fc" id="L459">		tabbedPane.addTab(&quot;Facebook&quot;, null, panelFacebook, null);</span>
+
+<span class="fc" id="L461">		JScrollPane scrollPane_2 = new JScrollPane();</span>
+
+<span class="fc" id="L463">		JScrollPane scrollPane_3 = new JScrollPane();</span>
+
+<span class="fc" id="L465">		btnActualizarF = new JButton(&quot;Actualizar&quot;);</span>
+
+<span class="fc" id="L467">		textFieldF = new JTextField();</span>
+<span class="fc" id="L468">		textFieldF.setColumns(10);</span>
+
+<span class="fc" id="L470">		JButton btnAlterarFiltroF = new JButton(&quot;Alterar Filtro&quot;);</span>
+<span class="fc" id="L471">		GroupLayout gl_panelFacebook = new GroupLayout(panelFacebook);</span>
+<span class="fc" id="L472">		gl_panelFacebook.setHorizontalGroup(gl_panelFacebook.createParallelGroup(Alignment.LEADING)</span>
+<span class="fc" id="L473">				.addGroup(gl_panelFacebook.createSequentialGroup().addGap(1)</span>
+<span class="fc" id="L474">						.addComponent(scrollPane_2, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)</span>
+<span class="fc" id="L475">						.addGap(2)</span>
+<span class="fc" id="L476">						.addComponent(scrollPane_3, GroupLayout.PREFERRED_SIZE, 203, GroupLayout.PREFERRED_SIZE)</span>
+<span class="fc" id="L477">						.addPreferredGap(ComponentPlacement.RELATED)</span>
+<span class="fc" id="L478">						.addGroup(gl_panelFacebook.createParallelGroup(Alignment.LEADING).addComponent(btnActualizarF)</span>
+<span class="fc" id="L479">								.addComponent(textFieldF, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,</span>
+<span class="fc" id="L480">										GroupLayout.PREFERRED_SIZE)</span>
+<span class="fc" id="L481">								.addComponent(btnAlterarFiltroF))</span>
+<span class="fc" id="L482">						.addContainerGap(32, Short.MAX_VALUE)));</span>
+<span class="fc" id="L483">		gl_panelFacebook.setVerticalGroup(gl_panelFacebook.createParallelGroup(Alignment.LEADING)</span>
+<span class="fc" id="L484">				.addComponent(scrollPane_3, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)</span>
+<span class="fc" id="L485">				.addComponent(scrollPane_2, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)</span>
+<span class="fc" id="L486">				.addGroup(gl_panelFacebook.createSequentialGroup().addContainerGap().addComponent(btnActualizarF)</span>
+<span class="fc" id="L487">						.addGap(18)</span>
+<span class="fc" id="L488">						.addComponent(textFieldF, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,</span>
+<span class="fc" id="L489">								GroupLayout.PREFERRED_SIZE)</span>
+<span class="fc" id="L490">						.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(btnAlterarFiltroF)</span>
+<span class="fc" id="L491">						.addContainerGap(202, Short.MAX_VALUE)));</span>
+
+<span class="fc" id="L493">		scrollPane_3.setViewportView(areaFacebook);</span>
+
+<span class="fc" id="L495">		scrollPane_2.setViewportView(listaFacebookposts);</span>
+<span class="fc" id="L496">		panelFacebook.setLayout(gl_panelFacebook);</span>
+
+<span class="fc" id="L498">		JPanel panelTwitter = new JPanel();</span>
+<span class="fc" id="L499">		tabbedPane.addTab(&quot;Twitter&quot;, null, panelTwitter, null);</span>
+
+<span class="fc" id="L501">		JScrollPane scrollPane_4 = new JScrollPane();</span>
+
+<span class="fc" id="L503">		JScrollPane scrollPane_5 = new JScrollPane();</span>
+
+<span class="fc" id="L505">		btnActualizarT = new JButton(&quot;Actualizar&quot;);</span>
+
+<span class="fc" id="L507">		txtFiltroT = new JTextField();</span>
+<span class="fc" id="L508">		txtFiltroT.setText(&quot;Filtro&quot;);</span>
+<span class="fc" id="L509">		txtFiltroT.setColumns(10);</span>
+
+<span class="fc" id="L511">		btnAlterarFiltroT = new JButton(&quot;Alterar Filtro&quot;);</span>
+		/*
+		 * Painel do Twitter
+		 */
+
+<span class="fc" id="L516">		JButton btnRetweetar = new JButton(&quot;Retweetar&quot;);</span>
+<span class="fc" id="L517">		GroupLayout gl_panelTwitter = new GroupLayout(panelTwitter);</span>
+<span class="fc" id="L518">		gl_panelTwitter.setHorizontalGroup(gl_panelTwitter.createParallelGroup(Alignment.LEADING)</span>
+<span class="fc" id="L519">				.addGroup(gl_panelTwitter.createSequentialGroup()</span>
+<span class="fc" id="L520">						.addComponent(scrollPane_4, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE)</span>
+<span class="fc" id="L521">						.addGap(1)</span>
+<span class="fc" id="L522">						.addComponent(scrollPane_5, GroupLayout.PREFERRED_SIZE, 206, GroupLayout.PREFERRED_SIZE)</span>
+<span class="fc" id="L523">						.addPreferredGap(ComponentPlacement.RELATED)</span>
+<span class="fc" id="L524">						.addGroup(gl_panelTwitter.createParallelGroup(Alignment.LEADING, false)</span>
+<span class="fc" id="L525">								.addComponent(btnAlterarFiltroT, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,</span>
+<span class="fc" id="L526">										Short.MAX_VALUE)</span>
+<span class="fc" id="L527">								.addComponent(txtFiltroT)</span>
+<span class="fc" id="L528">								.addComponent(btnActualizarT, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,</span>
+<span class="fc" id="L529">										Short.MAX_VALUE)</span>
+<span class="fc" id="L530">								.addComponent(btnRetweetar, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,</span>
+<span class="fc" id="L531">										Short.MAX_VALUE))</span>
+<span class="fc" id="L532">						.addContainerGap(42, Short.MAX_VALUE)));</span>
+<span class="fc" id="L533">		gl_panelTwitter.setVerticalGroup(gl_panelTwitter.createParallelGroup(Alignment.LEADING)</span>
+<span class="fc" id="L534">				.addGroup(gl_panelTwitter.createSequentialGroup().addContainerGap().addComponent(btnActualizarT)</span>
+<span class="fc" id="L535">						.addGap(33)</span>
+<span class="fc" id="L536">						.addComponent(txtFiltroT, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,</span>
+<span class="fc" id="L537">								GroupLayout.PREFERRED_SIZE)</span>
+<span class="fc" id="L538">						.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnAlterarFiltroT).addGap(40)</span>
+<span class="fc" id="L539">						.addComponent(btnRetweetar).addContainerGap(129, Short.MAX_VALUE))</span>
+<span class="fc" id="L540">				.addGroup(gl_panelTwitter.createSequentialGroup().addGap(1).addComponent(scrollPane_4,</span>
+<span class="fc" id="L541">						GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE))</span>
+<span class="fc" id="L542">				.addGroup(gl_panelTwitter.createSequentialGroup().addGap(2).addComponent(scrollPane_5,</span>
+<span class="fc" id="L543">						GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)));</span>
+
+<span class="fc" id="L545">		scrollPaneE.setViewportView(listaEmails);</span>
+
+<span class="fc" id="L547">		scrollPane_5.setViewportView(areaTweet);</span>
+<span class="fc" id="L548">		scrollPane_4.setViewportView(listaTweets);</span>
+<span class="fc" id="L549">		panelTwitter.setLayout(gl_panelTwitter);</span>
+<span class="fc" id="L550">		contentPane1.setLayout(gl_contentPane1);</span>
+<span class="fc" id="L551">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span>Gui (7/dez/2018 22:06:35)</div></body></html>
