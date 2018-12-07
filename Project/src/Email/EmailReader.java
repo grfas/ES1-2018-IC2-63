@@ -18,39 +18,16 @@ import javax.mail.internet.MimeMultipart;
 
 import GUI.Gui;
 import twitter4j.Status;
+import twitter4j.TwitterException;
 
 /**
- * Class reads emails
- *
- * @author outlook
- *
+ * @author Gonçalo Ferreira
+ * Classe que lê os e-mails
  */
 
 public class EmailReader {
 	public List<MessagePrint> MensagemDoIscte = new ArrayList<MessagePrint>();
 	private String filtroEmail="";
-
-	public String getFiltroEmail() {
-		return filtroEmail;
-	}
-
-	public void setFiltroEmail(String filtroEmail) {
-		this.filtroEmail = filtroEmail;
-	}
-
-	public List<MessagePrint> getMensagemDoIscte() {
-		return MensagemDoIscte;
-	}
-	
-	public void clearMessages() {
-		MensagemDoIscte.clear();
-	
-	}
-
-//	public Gui gui;
-//	public EmailReader(Gui gui) {
-//		this.gui=gui;
-//	}
 	public String user;
 	public String pass;
 
@@ -60,13 +37,52 @@ public class EmailReader {
 	}
 
 	/**
-	 * Method reads emails from the IMAP or POP3 server.
-	 * 
-	 * @param isImap - if true then we are reading messages from the IMAP server, if
-	 *               no then read from the POP3 server.
+	 * getFiltroEmail,
+	 * Getter que devolve o filtroEmail(filter).
+	 * @return filtroEmail
+	 */
+	public String getFiltroEmail() {
+		return filtroEmail;
+	}
+
+	/**
+	 * setFiltroEmail,
+	 * Setter para o filtroEmail
+	 * @param filtroEmail, é filtro que vamos aplicar aquando da exibição dos e-mails.
+	 */
+	public void setFiltroEmail(String filtroEmail) {
+		this.filtroEmail = filtroEmail;
+	}
+
+	/**
+	 * getMensagemDoIscte,
+	 * Getter que devolve uma Lista de MessagePrint provenientes de remetentes com o domínio do ISCTE.
+	 * @return MensagemDoIscte 
+	 */
+	public List<MessagePrint> getMensagemDoIscte() {
+		return MensagemDoIscte;
+	}
+	
+	/**
+	 * clearMessages,
+	 * permite limpar as mensagens da lista MensagemDoIscte. 
+	 */
+	public void clearMessages() {
+		MensagemDoIscte.clear();
+
+	}
+
+	
+
+
+	/**
+	 * readEmails,
+	 * permite ler os e-mails de um servidor IMAP ou POP3, preferencialmente IMAP
+	 * @param isImap, se se verificar "verdadeiro"(true) irá ler mensagens do servidor IMAP, se for falso lê do POP3.
+	 *
 	 */
 	public void readEmails(boolean isImap) {
-		
+
 		MensagemDoIscte.clear();
 		// Create all the needed properties - empty!
 		Properties connectionProperties = new Properties();
@@ -105,7 +121,7 @@ public class EmailReader {
 					if (i < 5) {
 						i++;
 						String result = b.split(" ")[0];
-//						if (result.equals(filtroEmail) || filtroEmail.equals(null)) {
+						//						if (result.equals(filtroEmail) || filtroEmail.equals(null)) {
 						if (result.equals(filtroEmail) ) {
 							System.out.println("result"+result);
 							System.out.println("From:" + a);
@@ -122,7 +138,7 @@ public class EmailReader {
 								}
 							}
 							if (content != null) {
-//                 System.out.println(content.toString());
+								//                 System.out.println(content.toString());
 								MessagePrint mp = new MessagePrint(a, message.getSubject(), content.toString());
 								MensagemDoIscte.add(mp);
 								System.out.println("lista emailReader" + getMensagemDoIscte());
@@ -145,7 +161,7 @@ public class EmailReader {
 								}
 							}
 							if (content != null) {
-//                 System.out.println(content.toString());
+								//                 System.out.println(content.toString());
 								MessagePrint mp = new MessagePrint(a, message.getSubject(), content.toString());
 								MensagemDoIscte.add(mp);
 								System.out.println("lista emailReader" + getMensagemDoIscte());
@@ -157,8 +173,8 @@ public class EmailReader {
 						System.out.println("Não existem mais mensagens recentes");
 						return;
 					}
-					}
-//				}
+				}
+				//				}
 
 			}
 
@@ -167,7 +183,7 @@ public class EmailReader {
 		}
 
 	}
-	 
-		
-	
+
+
+
 }

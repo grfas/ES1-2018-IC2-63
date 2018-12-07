@@ -141,7 +141,7 @@ package Twitter;
 
 	/**
 	 * setFiltro,
-	 * Setter for filtro (filter).
+	 * Setter para o filtro (filter).
 	 * @param filtro, é o filtro que vamos aplicar aquando da exibição dos tweets.
 	 */
 	public void setFiltro(String filtro) {
