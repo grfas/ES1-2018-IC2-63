@@ -17,7 +17,11 @@ import com.restfb.Version;
 import Facebook.Constantes;
 import Facebook.CustomUser;
 import xmltry.Offline;
-
+	/**
+	 * 
+	 * @author Francisco Bruno
+	 *
+	 */
 public class InicializadorFacebook {
 	public List<Post> mensagemDoIscte = new ArrayList<Post>();
 	
@@ -25,7 +29,8 @@ public class InicializadorFacebook {
 	private Connection<Post> myFeed;
 	private FacebookClient facebookClient;
 	/**
-	 * Inicia a conexão com a api do facebook, através do token de acesso
+	 * IniciaFace, 
+	 * inicia a conexão com a api do facebook, através do token de acesso
 	 */
 	public void IniciaFace() {
 		facebookClient = new DefaultFacebookClient(Constantes.MY_ACCESS_TOKEN, Version.LATEST);
@@ -41,6 +46,10 @@ public class InicializadorFacebook {
 		actualizaFace();
 	}
 	
+	/**
+	 * actualizaFace,
+	 * atualiza o facebook
+	 */
 	public void actualizaFace() {
 		myFeed = facebookClient.fetchConnection("me/feed", Post.class);
 		System.out.println("\nPosts:");
@@ -66,10 +75,20 @@ public class InicializadorFacebook {
 			
 
 	}
-	
+	/**
+	 * getMensagemDoIscte,
+	 * Getter que devolve uma Lista de Posts com conteúdo do ISCTE.
+	 * @return MensagemDoIscte 
+	 */
 	public List<Post> getMensagemDoIscte() {
 		return mensagemDoIscte;
 	}
+	
+	/**
+	 * setMensagemDoIscte,
+	 * Setter que define uma Lista de Posts com conteúdo do ISCTE.
+	 * @param mensagemDoIscte 
+	 */
 	public void setMensagemDoIscte(List<Post> mensagemDoIscte) {
 		this.mensagemDoIscte = mensagemDoIscte;
 	}

@@ -72,9 +72,6 @@ public class EmailReader {
 
 	}
 
-	
-
-
 	/**
 	 * readEmails,
 	 * permite ler os e-mails de um servidor IMAP ou POP3, preferencialmente IMAP
