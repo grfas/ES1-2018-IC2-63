@@ -23,6 +23,12 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Action;
 
+	/**
+	 * 
+	 * @author Gonçalo Ferreira e João Estêvão
+	 * Classe para a caixa de login da GUI
+	 *
+	 */
 public class LoginBox extends JFrame {
 
 	private String passwordInput;
@@ -41,7 +47,8 @@ public class LoginBox extends JFrame {
 	}
 
 	/**
-	 * Launch the application.
+	 * correLogin,
+	 * inicia a aplicação.
 	 */
 	public void correLogin() {
 		LoginBox frame = new LoginBox(gui);
@@ -49,7 +56,8 @@ public class LoginBox extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * init,
+	 * cria a moldura.
 	 */
 	public void init() {
 		setTitle("Login");
@@ -100,6 +108,10 @@ public class LoginBox extends JFrame {
 		contentPane.setLayout(gl_contentPane);
 	}
 
+	/**
+	 * events,
+	 * procedimento que associa os eventos da aplicação a cada acção 
+	 */
 	private void events() {
 
 		btnLogin.addActionListener(new ActionListener() {
@@ -118,25 +130,54 @@ public class LoginBox extends JFrame {
 		});
 	}
 
+	/**
+	 * getLoginInput
+	 * Getter que devolve o e-mail de login
+	 *@return emailInput
+	 */
 	public String getLoginInput() {
 		return emailInput;
 	}
+	/**
+	 * setLoginInput,
+	 * Setter para o LoginInput
+	 * @param emailInput, e-mail com o qual pretendemos iniciar sessão.
+	 */
 	public void setLoginInput() {
 		gui.setLogUser(getLoginInput());
 	}
 	
+	/**
+	 * setPassInput,
+	 * Setter para o PassInput
+	 * @param passwordInput, palavra-passe com a qual pretendemos iniciar sessão.
+	 */
 	public void setPassInput() {
 		gui.setLogPass(getPassInput());
 	}
 
+	/**
+	 * getLoginInput
+	 * Getter que devolve o passeInput
+	 *@return passwordInput, palavra-passe que usamos 
+	 */
 	public String getPassInput() {
 		return passwordInput;
 	}
 
+	/**
+	 * setLoginInput,
+	 * Setter para o LoginInput
+	 * @param emailInput, e-mail com o qual pretendemos iniciar sessão.
+	 */
 	public void setLoginInput(String input) {
 		this.emailInput = input;
 	}
-
+	/**
+	 * setPassInput,
+	 * Setter para o PassInput
+	 * @param passwordInput, palavra-passe com a qual pretendemos iniciar sessão.
+	 */
 	public void setPassInput(String input) {
 		this.passwordInput = input;
 	}

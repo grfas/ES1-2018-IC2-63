@@ -41,6 +41,10 @@ import javax.swing.JDesktopPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+/**
+ * @author João Estêvão
+ * Classe construtora e inicializadora da Gui
+ */
 
 public class Gui extends JFrame {
 	private DefaultListModel<String> model = new DefaultListModel<>();
@@ -79,12 +83,11 @@ public class Gui extends JFrame {
 	
 	
 	/**
-	 * Launch the application.
-	 * 
+	 * main,
+	 * o método main é onde a gui é criada
+	 * @param args
 	 * @throws TwitterException
 	 */
-	
-	
 	
 	public static void main(String[] args) {
 
@@ -127,7 +130,10 @@ public class Gui extends JFrame {
 		
 	}
 	
-	
+	/**
+	 *offlineRead,
+	 *permite a leitura/visualização de posts e e-mails, offline.
+	 */
 	public static void offlineRead() {
 		System.out.println("olá"+listaPosts.size());
 		for(String f :listaPosts)
@@ -139,7 +145,8 @@ public class Gui extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Gui
+	 * Cria a moldura.
 	 */
 	public Gui() {
 		init();
@@ -150,7 +157,8 @@ public class Gui extends JFrame {
 	}
 
 	/**
-	 * atualização da lista de status/tweets
+	 * relisTweets,
+	 * permite atualizar a lista de status/tweets
 	 * 
 	 */
 	private void relistTweets() {
@@ -159,24 +167,46 @@ public class Gui extends JFrame {
 			model.addElement(s.getUser().getName() + " - " + s.getCreatedAt());
 			System.out.println(s.getUser().getName() + " - " + s.getCreatedAt());
 		}
-
 	}
+	
+	/**
+	 * setLogUser,
+	 * Setter para o log
+	 * @param  log, e-mail com o qual pretendemos iniciar sessão na gui.
+	 */
 	public void setLogUser(String log) {
 		emailLog=log;
 	}
-
+	/**
+	 * getLogUser
+	 * Getter que devolve o log
+	 *@return e-mailLog, e-mail com o qual pretendemos iniciar sessão na gui. 
+	 */
 	public String getLogUser() {
 		return emailLog;
 	}
+	
+	/**
+	 * setLogPass,
+	 * Setter para o Pass
+	 * @param Pass, palavra-passe com a qual pretendemos iniciar sessão.
+	 */
+
 	public void setLogPass(String Pass) {
 		emailPass=Pass;
 	}
 
+	/**
+	 * getLogPass
+	 * Getter que devolve a emailPass
+	 *@return passwordInput, palavra-passe que usamos associada ao e-mail
+	 */
 	public String getLogPass() {
 		return emailPass;
 	}
 	/**
-	 * atualização da lista emails
+	 * relistaEmails,
+	 * atualização da lista de e-mails
 	 */
 	private void relistaEmails() {
 
@@ -186,7 +216,10 @@ public class Gui extends JFrame {
 		}
 
 	}
-
+	/**
+	 * relistaFacebookPosts,
+	 * atualização da lista de posts do facebook
+	 */
 	private void relistaFacebookPosts() {
 		for (Post p : facebook.getMensagemDoIscte()) {
 			modelFacebook.addElement((p.getFrom()) + " - " + p.getCaption());
@@ -194,6 +227,10 @@ public class Gui extends JFrame {
 		}
 	}
 
+	/**
+	 * events,
+	 * procedimento que associa os eventos da aplicação a cada acção 
+	 */
 	private void events() {
 
 		btnActualizarF.addActionListener(new ActionListener() {
@@ -340,12 +377,19 @@ public class Gui extends JFrame {
 			}
 		});
 	}
-
+    /**
+     *actualizarTweets,
+     *procedimento que actualiza lista de Tweets 
+    */
 	private void actualizarTweets() {
 		this.listaEstados.clear();
 		this.listaEstados = twitter.getListaTweets();
 	}
-
+	
+	/**
+	 * init,
+	 * procedimento para a construção e inicialização da janela
+	 */
 	private void init() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 516, 390);
